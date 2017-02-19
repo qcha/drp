@@ -2,6 +2,7 @@ package com.github.aarexer.qcha.drp.deserializers;
 
 
 import com.github.aarexer.qcha.drp.model.DsvFileResource;
+import lombok.NonNull;
 import org.supercsv.io.CsvListReader;
 import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
@@ -17,9 +18,9 @@ public class DsvFileIterator implements Iterator<List<String>> {
     private final ICsvListReader reader;
     private List<String> current;
 
-    public DsvFileIterator(final DsvFileResource resource) throws IOException {
+    public DsvFileIterator(@NonNull final DsvFileResource resource) throws IOException {
         final CsvPreference csvPreference = new CsvPreference.Builder(
-                resource.getQuotes(),
+                getQuotes(resource.getQuotes()),
                 getDelimiter(resource.getDelimiter()),
                 getLineSeparator(resource.getLineSeparator())
         ).build();
@@ -41,6 +42,10 @@ public class DsvFileIterator implements Iterator<List<String>> {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    private char getQuotes(final String propertyQuotes) {
+        return Objects.nonNull(propertyQuotes) && propertyQuotes.length() > 0 ? propertyQuotes.charAt(0) : '"';
     }
 
     private char getDelimiter(final String propertyDelimiter) {

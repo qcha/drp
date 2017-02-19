@@ -15,6 +15,6 @@ public class DsvFileResource {
     private final String compressType;
     private final String delimiter;
     private final String encoding;
-    private final char quotes;
+    private final String quotes;
     private final String lineSeparator;
 }
