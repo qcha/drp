@@ -23,8 +23,11 @@ And can storing as:
 All what you need is resource [`URI`](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier).
 
 ### What's inside?
-* Java 8
+* Java 8 
 * CSV Parser: `super-csv`
 * Working with archives: `commons-compress`
 * Testing: `junit`
 * Other: `lombok`, `guava`
+
+
+[![Java 8](https://img.shields.io/badge/java-8-brightgreen.svg)](#java-8)
