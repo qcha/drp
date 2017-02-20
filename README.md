@@ -1,12 +1,30 @@
-## drp
+## DRP
 Dsv Resource Parser
 
-It's a common library for ETL.
+### What is DSV?
+Shortly: Delimiter Separated Values
 
-Framework can work with file and archives.
+More about: [`DSV`](https://en.wikipedia.org/wiki/Delimiter-separated_values)
 
+### What's about DRP?
+`DRP` - is a library which can work with `DSV`-resources.
 
-If you working with CSV files, which can be on FTP-server or in archives - try drp.
+Resources can be:
+* Common files
+* Archive files
+
+And can storing as:
+* Local
+* Remote:
+    * FTP
+    * SFTP
+    * FTPS
+
+All what you need is resource [`URI`](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier).
 
 ### What's inside?
-//todo
+* Java 8
+* CSV Parser: `super-csv`
+* Working with archives: `commons-compress`
+* Testing: `junit`
+* Other: `lombok`, `guava`
