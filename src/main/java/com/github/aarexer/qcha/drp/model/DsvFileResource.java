@@ -1,6 +1,8 @@
 package com.github.aarexer.qcha.drp.model;
 
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URI;
 import java.nio.charset.Charset;
@@ -9,6 +11,8 @@ import java.util.Objects;
 
 @Getter
 public class DsvFileResource {
+    private static final Logger logger = LogManager.getLogger();
+
     private URI uri;
     private String archiveType;
     private String compressType;
@@ -20,9 +24,13 @@ public class DsvFileResource {
     private DsvFileResource() {
     }
 
-    //todo add logging and warning if null
     public char getDelimiter(final String propertyDelimiter) {
-        return Objects.nonNull(propertyDelimiter) && propertyDelimiter.length() > 0 ? propertyDelimiter.charAt(0) : ';';
+        if (Objects.nonNull(propertyDelimiter) && propertyDelimiter.length() > 0) {
+            return propertyDelimiter.charAt(0);
+        } else {
+            logger.info("Set default delimiter: ';'");
+            return ';';
+        }
     }
 
     public static Builder builder() {
@@ -77,6 +85,7 @@ public class DsvFileResource {
 
         public DsvFileResource build() {
             if (Objects.isNull(uri)) {
+                logger.error("URI is null!");
                 throw new IllegalArgumentException("URI can't be null.");
             }
 
