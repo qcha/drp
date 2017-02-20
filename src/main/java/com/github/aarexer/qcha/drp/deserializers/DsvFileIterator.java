@@ -20,9 +20,9 @@ public class DsvFileIterator implements Iterator<List<String>> {
 
     public DsvFileIterator(@NonNull final DsvFileResource resource) throws IOException {
         final CsvPreference csvPreference = new CsvPreference.Builder(
-                getQuotes(resource.getQuotes()),
-                getDelimiter(resource.getDelimiter()),
-                getLineSeparator(resource.getLineSeparator())
+                resource.getQuotes(),
+                resource.getDelimiter(resource.getDelimiter()),
+                resource.getLineSeparator()
         ).build();
         reader = new CsvListReader(Files.newBufferedReader(Paths.get(resource.getUri())), csvPreference);
         current = reader.read();
@@ -42,17 +42,5 @@ public class DsvFileIterator implements Iterator<List<String>> {
         } catch (IOException e) {
             return null;
         }
-    }
-
-    private char getQuotes(final String propertyQuotes) {
-        return Objects.nonNull(propertyQuotes) && propertyQuotes.length() > 0 ? propertyQuotes.charAt(0) : '"';
-    }
-
-    private char getDelimiter(final String propertyDelimiter) {
-        return Objects.nonNull(propertyDelimiter) && propertyDelimiter.length() > 0 ? propertyDelimiter.charAt(0) : ';';
-    }
-
-    private String getLineSeparator(final String propertyLineSeparator) {
-        return Objects.nonNull(propertyLineSeparator) && propertyLineSeparator.length() > 0 ? propertyLineSeparator : System.getProperty("line.separator");
     }
 }
