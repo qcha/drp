@@ -10,11 +10,10 @@ import org.supercsv.prefs.CsvPreference;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class DsvFileIterator implements Iterator<List<String>> {
+public class DsvFileIterator implements Deserializer {
     private final ICsvListReader reader;
     private List<String> current;
 
