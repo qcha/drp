@@ -20,7 +20,7 @@ public class DsvFileIterator implements Deserializer {
     public DsvFileIterator(@NonNull final DsvFileResource resource) throws IOException {
         final CsvPreference csvPreference = new CsvPreference.Builder(
                 resource.getQuotes(),
-                resource.getDelimiter(resource.getDelimiter()),
+                resource.getDelimiter(),
                 resource.getLineSeparator()
         ).build();
         reader = new CsvListReader(Files.newBufferedReader(Paths.get(resource.getUri())), csvPreference);

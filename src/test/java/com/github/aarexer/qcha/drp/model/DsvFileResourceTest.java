@@ -5,15 +5,11 @@ import org.junit.Test;
 
 import java.net.URI;
 
+//todo tests
 public class DsvFileResourceTest {
     @Test
     public void createResourceAndFillOnlyUri() throws Exception {
-        final DsvFileResource resource = DsvFileResource.builder().uri(URI.create("file:///c:/path/to/file.txt")).build();
+        final DsvFileResource resource = new DsvFileResource(URI.create("file:///c:/path/to/file.txt"));
         Assert.assertEquals("file:///c:/path/to/file.txt", resource.getUri().toString());
-    }
-
-    @Test(expected=IllegalArgumentException.class)
-    public void createResourceWithoutFillingFinalField() throws Exception {
-        final DsvFileResource resource = DsvFileResource.builder().build();
     }
 }
