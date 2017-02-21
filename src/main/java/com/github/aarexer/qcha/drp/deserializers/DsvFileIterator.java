@@ -23,7 +23,7 @@ public class DsvFileIterator implements Deserializer {
                 resource.getDelimiter(),
                 resource.getLineSeparator()
         ).build();
-        reader = new CsvListReader(Files.newBufferedReader(Paths.get(resource.getUri())), csvPreference);
+        reader = new CsvListReader(Files.newBufferedReader(Paths.get(resource.getUri()), resource.getEncoding()), csvPreference);
         current = reader.read();
     }
 
