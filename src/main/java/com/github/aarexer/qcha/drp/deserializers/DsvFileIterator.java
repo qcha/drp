@@ -8,12 +8,16 @@ import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
-public class DsvFileIterator implements Deserializer {
+/**
+ * Iterator for plain dsv file.
+ */
+public class DsvFileIterator implements DsvIterator {
     private final ICsvListReader reader;
     private List<String> current;
 
@@ -23,7 +27,7 @@ public class DsvFileIterator implements Deserializer {
                 resource.getDelimiter(),
                 resource.getLineSeparator()
         ).build();
-        reader = new CsvListReader(Files.newBufferedReader(Paths.get(resource.getUri()), resource.getEncoding()), csvPreference);
+        reader = new CsvListReader(Files.newBufferedReader(Paths.get(resource.getUri()), Charset.forName(resource.getEncoding())), csvPreference);
         current = reader.read();
     }
 

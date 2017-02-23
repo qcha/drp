@@ -6,8 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URI;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 @Getter
 public class DsvFileResource {
@@ -15,20 +13,19 @@ public class DsvFileResource {
     private static final char DEFAULT_QUOTES = '"';
     private static final char DEFAULT_DELIMITER = ';';
     private static final String DEFAULT_LINE_SEPARATOR = System.lineSeparator();
-    private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
+    private static final String DEFAULT_CHARSET = "UTF-8";
 
     @NonNull
     private final URI uri;
     @NonNull
     private final char delimiter;
     private final char quotes;
-    private final Charset encoding;
+    private final String encoding;
     private final String lineSeparator;
-    //todo it should not be strings
-    private final String archiveType;
-    private final String compressType;
+    private final ArchiveType archiveType;
+    private final CompressType compressType;
 
-    public DsvFileResource(URI uri, char delimiter, Charset encoding, String lineSeparator, char quotes, String archiveType, String compressType) {
+    public DsvFileResource(URI uri, char delimiter, String encoding, String lineSeparator, char quotes, ArchiveType archiveType, CompressType compressType) {
         this.uri = uri;
         this.delimiter = delimiter;
         this.encoding = encoding;
@@ -42,7 +39,7 @@ public class DsvFileResource {
         this(uri, DEFAULT_DELIMITER, DEFAULT_CHARSET, DEFAULT_LINE_SEPARATOR, DEFAULT_QUOTES, null, null);
     }
 
-    public DsvFileResource(URI uri, char delimiter, String archiveType, String compressType) {
-        this(uri, delimiter, StandardCharsets.UTF_8, System.lineSeparator(), DEFAULT_QUOTES, archiveType, compressType);
+    public DsvFileResource(URI uri, char delimiter, ArchiveType archiveType, CompressType compressType) {
+        this(uri, delimiter, DEFAULT_CHARSET, System.lineSeparator(), DEFAULT_QUOTES, archiveType, compressType);
     }
 }
