@@ -1,49 +1,21 @@
 package com.github.aarexer.qcha.drp.deserializers;
 
 
-import com.github.aarexer.qcha.drp.model.DsvFileResource;
+import com.github.aarexer.qcha.drp.model.DsvPreference;
 import lombok.NonNull;
-import org.supercsv.io.CsvListReader;
-import org.supercsv.io.ICsvListReader;
-import org.supercsv.prefs.CsvPreference;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Objects;
+import java.io.InputStream;
 
 /**
  * Iterator for plain dsv file.
  */
-public class DsvFileIterator implements DsvIterator {
-    private final ICsvListReader reader;
-    private List<String> current;
-
-    public DsvFileIterator(@NonNull final DsvFileResource resource) throws IOException {
-        final CsvPreference csvPreference = new CsvPreference.Builder(
-                resource.getQuotes(),
-                resource.getDelimiter(),
-                resource.getLineSeparator()
-        ).build();
-        reader = new CsvListReader(Files.newBufferedReader(Paths.get(resource.getUri()), Charset.forName(resource.getEncoding())), csvPreference);
-        current = reader.read();
+public class DsvFileIterator extends DsvIterator {
+    public DsvFileIterator(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws IOException {
+        super(is, preference);
     }
 
-    @Override
-    public boolean hasNext() {
-        return Objects.nonNull(current);
-    }
-
-    @Override
-    public List<String> next() {
-        try {
-            final List<String> before = current;
-            current = reader.read();
-            return before;
-        } catch (IOException e) {
-            return null;
-        }
+    public DsvFileIterator(@NonNull final InputStream is, final int bufferSize, @NonNull final DsvPreference preference) throws IOException {
+        super(is, bufferSize, preference);
     }
 }
