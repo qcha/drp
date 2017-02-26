@@ -12,20 +12,7 @@ import java.util.Map;
 
 public final class FileResourceHandler {
     private InputStream is;
-    private CompressorInputStream cis;
-    private ArchiveInputStream ais;
-
-    private final Map<String, String> ASSOCIATED_TYPES = ImmutableMap.of(
-            "zip", ArchiveStreamFactory.ZIP,
-            "tar", ArchiveStreamFactory.TAR,
-            "gz", CompressorStreamFactory.GZIP,
-            "bz2", CompressorStreamFactory.BZIP2
-    );
 
     public FileResourceHandler(DsvFileResource resource) {
     }
-
-//    private void resolveType() {
-//        new CompressorStreamFactory().
-//    }
 }
