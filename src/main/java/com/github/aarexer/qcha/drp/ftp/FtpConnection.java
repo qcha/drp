@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class FtpConnection implements IFtpClient, AutoCloseable {
+public class FtpConnection implements IFtpConnection, AutoCloseable {
     private static final Logger logger = LogManager.getLogger();
 
     private final FTPClient ftpClient;
