@@ -6,7 +6,7 @@ public final class FtpService {
     private FtpService() {
     }
 
-    public static FtpClient getFtpClient(String host, int port, String username, String password) throws IOException {
-        return new FtpClient(host, port, username, password);
+    public static FtpConnection getFtpConnection(String host, int port, String username, String password) throws IOException {
+        return new FtpConnection(host, port, username, password);
     }
 }

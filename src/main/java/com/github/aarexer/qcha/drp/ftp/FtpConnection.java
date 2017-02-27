@@ -9,14 +9,14 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class FtpClient implements IFtpClient, AutoCloseable {
+public class FtpConnection implements IFtpClient, AutoCloseable {
     private static final Logger logger = LogManager.getLogger();
 
     private final FTPClient ftpClient;
     private final String host;
     private final int port;
 
-    public FtpClient(String host, int port, String username, String password) throws IOException {
+    public FtpConnection(String host, int port, String username, String password) throws IOException {
         ftpClient = new FTPClient();
         this.host = host;
         this.port = port;
