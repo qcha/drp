@@ -60,7 +60,9 @@ public class FtpConnection implements IFtpConnection, AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        ftpClient.logout();
-        ftpClient.disconnect();
+        if (ftpClient.isConnected()) {
+            ftpClient.logout();
+            ftpClient.disconnect();
+        }
     }
 }
