@@ -17,15 +17,16 @@ public class FtpConnection implements IFtpConnection, AutoCloseable {
     private final int port;
 
     public FtpConnection(String host, int port, String username, String password) throws IOException {
-        ftpClient = new FTPClient();
         this.host = host;
         this.port = port;
 
-        connect();
-        login(username, password);
-
+        ftpClient = new FTPClient();
         ftpClient.enterLocalPassiveMode();
         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+        //fixme may be write better
+        connect();
+        login(username, password);
     }
 
     private void connect() throws IOException {
@@ -38,7 +39,7 @@ public class FtpConnection implements IFtpConnection, AutoCloseable {
         }
     }
 
-    private void login(String username, String password) throws IOException {
+    private void login(final String username, final String password) throws IOException {
         if (!ftpClient.login(username, password)) {
             logger.error("Can't logging to: {} on port: {} with given username: {} and password: {}", host, port, username, password);
             //fixme bad design.
@@ -49,17 +50,17 @@ public class FtpConnection implements IFtpConnection, AutoCloseable {
     }
 
     @Override
-    public InputStream getResourceInputStream(String filename) throws IOException {
+    public InputStream getResourceInputStream(final String filename) throws IOException {
         return ftpClient.retrieveFileStream(filename);
     }
 
     @Override
-    public boolean changeDir(String dirname) throws IOException {
+    public boolean changeDir(final String dirname) throws IOException {
         return ftpClient.changeWorkingDirectory(dirname);
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws IOException {
         if (ftpClient.isConnected()) {
             ftpClient.logout();
             ftpClient.disconnect();
