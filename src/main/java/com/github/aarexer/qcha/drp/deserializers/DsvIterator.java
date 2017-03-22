@@ -20,8 +20,8 @@ import java.util.Objects;
 public abstract class DsvIterator implements Iterator<List<String>> {
     private static final Logger logger = LogManager.getLogger();
 
-    protected final ICsvListReader reader;
-    protected List<String> current;
+    private final ICsvListReader reader;
+    private List<String> current;
 
     public DsvIterator(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws IOException {
         final CsvPreference csvPreference = new CsvPreference.Builder(
