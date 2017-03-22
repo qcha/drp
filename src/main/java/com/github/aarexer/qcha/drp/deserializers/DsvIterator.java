@@ -2,6 +2,7 @@ package com.github.aarexer.qcha.drp.deserializers;
 
 import com.github.aarexer.qcha.drp.model.DsvPreference;
 import lombok.NonNull;
+import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.supercsv.io.CsvListReader;
@@ -28,6 +29,12 @@ public abstract class DsvIterator implements Iterator<List<String>> {
                 preference.getDelimiter(),
                 preference.getLineSeparator()
         ).build();
+
+        //todo test it and rewrite
+        if (is instanceof ArchiveInputStream) {
+            ((ArchiveInputStream) is).getNextEntry();
+        }
+
         reader = new CsvListReader(new BufferedReader(new InputStreamReader(is, preference.getEncoding())), csvPreference);
         current = reader.read();
     }

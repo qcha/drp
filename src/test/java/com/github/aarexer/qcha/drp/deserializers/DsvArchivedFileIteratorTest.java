@@ -10,21 +10,14 @@ import java.util.List;
 public class DsvArchivedFileIteratorTest {
     private DsvArchivedFileIterator iterator;
     private List<String> lst;
+
     @Test
     public void parseFirstLineInFileArchive() throws Exception {
         iterator = new DsvArchivedFileIterator(getClass().getResourceAsStream("FileTest.zip"), new DsvPreference(ArchiveType.ZIP, null));
         lst = iterator.next();
-        Assert.assertEquals(iterator.hasNext(),true);
+        Assert.assertEquals(iterator.hasNext(), true);
         Assert.assertEquals(lst.size(), 2);
         Assert.assertEquals(lst.contains("value2"), true);
         Assert.assertEquals(lst.get(0), "value1");
-        //to final line
-        iterator.next();
-        iterator.next();
-        iterator.next();
-        Assert.assertEquals(lst.isEmpty(), false);
-        Assert.assertEquals(lst.contains("sci-lab"), true);
-        Assert.assertEquals(iterator.hasNext(), false);
-
     }
 }
