@@ -9,7 +9,7 @@ import java.net.URI;
 public class DsvFileResourceTest {
     @Test
     public void createResourceAndFillOnlyUri() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(URI.create("file:///c:/path/to/file.txt"));
-        Assert.assertEquals("file:///c:/path/to/file.txt", resource.getUri().toString());
+        final DsvFileResource resource = new DsvFileResource(URI.create("file:///path/to/file.txt"));
+        Assert.assertEquals("file:///path/to/file.txt", resource.getUri().toString());
     }
 }

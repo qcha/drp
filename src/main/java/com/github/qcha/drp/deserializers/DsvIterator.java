@@ -31,6 +31,7 @@ public abstract class DsvIterator implements Iterator<List<String>> {
         ).build();
 
         //todo test it and rewrite
+        //fixme bug with archives with more then 1 file
         if (is instanceof ArchiveInputStream) {
             ((ArchiveInputStream) is).getNextEntry();
         }
