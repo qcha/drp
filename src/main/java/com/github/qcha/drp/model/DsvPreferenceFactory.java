@@ -1,4 +1,4 @@
-package com.github.aarexer.qcha.drp.model;
+package com.github.qcha.drp.model;
 
 public final class DsvPreferenceFactory {
     private DsvPreferenceFactory() {

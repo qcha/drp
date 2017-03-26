@@ -1,4 +1,4 @@
-package com.github.aarexer.qcha.drp.model;
+package com.github.qcha.drp.model;
 
 import org.junit.Assert;
 import org.junit.Test;

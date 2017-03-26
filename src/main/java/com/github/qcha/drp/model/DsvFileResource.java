@@ -1,4 +1,4 @@
-package com.github.aarexer.qcha.drp.model;
+package com.github.qcha.drp.model;
 
 import lombok.Getter;
 import lombok.NonNull;

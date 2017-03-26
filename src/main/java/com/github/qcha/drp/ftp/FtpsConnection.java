@@ -1,4 +1,4 @@
-package com.github.aarexer.qcha.drp.ftp;
+package com.github.qcha.drp.ftp;
 
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.ftp.FTPSClient;

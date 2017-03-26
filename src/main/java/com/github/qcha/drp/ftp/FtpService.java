@@ -1,4 +1,4 @@
-package com.github.aarexer.qcha.drp.ftp;
+package com.github.qcha.drp.ftp;
 
 import java.io.IOException;
 

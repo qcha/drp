@@ -1,7 +1,7 @@
-package com.github.aarexer.qcha.drp.deserializers;
+package com.github.qcha.drp.deserializers;
 
-import com.github.aarexer.qcha.drp.model.ArchiveType;
-import com.github.aarexer.qcha.drp.model.DsvPreference;
+import com.github.qcha.drp.model.ArchiveType;
+import com.github.qcha.drp.model.DsvPreference;
 import org.junit.Assert;
 import org.junit.Test;
 

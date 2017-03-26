@@ -1,6 +1,6 @@
-package com.github.aarexer.qcha.drp.deserializers;
+package com.github.qcha.drp.deserializers;
 
-import com.github.aarexer.qcha.drp.model.DsvPreference;
+import com.github.qcha.drp.model.DsvPreference;
 import lombok.NonNull;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
