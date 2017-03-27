@@ -24,20 +24,7 @@ public abstract class DsvIterator implements Iterator<List<String>> {
     private List<String> current;
 
     public DsvIterator(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws IOException {
-        final CsvPreference csvPreference = new CsvPreference.Builder(
-                preference.getQuotes(),
-                preference.getDelimiter(),
-                preference.getLineSeparator()
-        ).build();
-
-        //todo test it and rewrite
-        //fixme bug with archives with more then 1 file
-        if (is instanceof ArchiveInputStream) {
-            ((ArchiveInputStream) is).getNextEntry();
-        }
-
-        reader = new CsvListReader(new BufferedReader(new InputStreamReader(is, preference.getEncoding())), csvPreference);
-        current = reader.read();
+        this(is, 8192, preference);
     }
 
     public DsvIterator(@NonNull final InputStream is, final int bufferSize, @NonNull final DsvPreference preference) throws IOException {
@@ -46,6 +33,12 @@ public abstract class DsvIterator implements Iterator<List<String>> {
                 preference.getDelimiter(),
                 preference.getLineSeparator()
         ).build();
+
+        //fixme bug with archives with more then 1 file
+        if (is instanceof ArchiveInputStream) {
+            ((ArchiveInputStream) is).getNextEntry();
+        }
+
         reader = new CsvListReader(new BufferedReader(new InputStreamReader(is, preference.getEncoding()), bufferSize), csvPreference);
         current = reader.read();
     }
