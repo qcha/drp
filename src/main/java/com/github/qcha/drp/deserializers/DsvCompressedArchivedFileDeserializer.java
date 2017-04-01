@@ -42,9 +42,17 @@ public class DsvCompressedArchivedFileDeserializer implements DsvDeserializer {
         return iterator.hasNext();
     }
 
-    //fixme
     @Override
     public List<String> next() {
-        return iterator.next();
+        try {
+            List<String> res = iterator.next();
+            if (Objects.isNull(res) && Objects.isNull(ais.getNextEntry())) {
+                return null;
+            } else {
+                return iterator.next();
+            }
+        } catch (IOException e) {
+            throw new IllegalStateException("Can't do next.", e);
+        }
     }
 }
