@@ -7,13 +7,13 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class DsvArchivedFileIteratorTest {
-    private DsvArchivedFileIterator iterator;
+public class DsvArchivedFileDeserializerTest {
+    private DsvArchivedFileDeserializer iterator;
     private List<String> lst;
 
     @Test
     public void parseFileArchiveWithOnlyOneFileInside() throws Exception {
-        iterator = new DsvArchivedFileIterator(getClass().getResourceAsStream("FileTest.zip"), new DsvPreference(ArchiveType.ZIP, null));
+        iterator = new DsvArchivedFileDeserializer(getClass().getResourceAsStream("FileTest.zip"), new DsvPreference(ArchiveType.ZIP, null));
         //more than one string in file
         Assert.assertEquals(iterator.hasNext(), true);
 
@@ -55,7 +55,7 @@ public class DsvArchivedFileIteratorTest {
 
     @Test
     public void parseFileArchiveWithTwoFilesInside() throws Exception {
-        iterator = new DsvArchivedFileIterator(getClass().getResourceAsStream("2files.zip"), new DsvPreference(ArchiveType.ZIP, null));
+        iterator = new DsvArchivedFileDeserializer(getClass().getResourceAsStream("2files.zip"), new DsvPreference(ArchiveType.ZIP, null));
         //more than one string in file
         Assert.assertEquals(iterator.hasNext(), true);
 

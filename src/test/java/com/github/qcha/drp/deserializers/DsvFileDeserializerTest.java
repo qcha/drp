@@ -7,14 +7,14 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Objects;
 
-public class DsvFileIteratorTest {
-    private DsvFileIterator dsvFileIterator;
+public class DsvFileDeserializerTest {
+    private DsvFileDeserializer dsvFileDeserializer;
 
     @Test
     public void parseFirstLineOfThePlainFile() throws Exception {
-        dsvFileIterator = new DsvFileIterator(getClass().getResourceAsStream("FileTest.csv"), new DsvPreference());
-        Assert.assertEquals(dsvFileIterator.hasNext(), true);
-        final List<String> lst = dsvFileIterator.next();
+        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("FileTest.csv"), new DsvPreference());
+        Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
+        final List<String> lst = dsvFileDeserializer.next();
         Assert.assertEquals(Objects.isNull(lst), false);
         Assert.assertEquals(lst.size(), 2);
         Assert.assertEquals(lst.get(0), "value1");
@@ -23,11 +23,11 @@ public class DsvFileIteratorTest {
 
     @Test
     public void parseSecondLineOfThePlainFile() throws Exception {
-        dsvFileIterator = new DsvFileIterator(getClass().getResourceAsStream("FileTest.csv"), new DsvPreference());
-        Assert.assertEquals(dsvFileIterator.hasNext(), true);
+        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("FileTest.csv"), new DsvPreference());
+        Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
         // skip first line
-        dsvFileIterator.next();
-        final List<String> lst = dsvFileIterator.next();
+        dsvFileDeserializer.next();
+        final List<String> lst = dsvFileDeserializer.next();
         Assert.assertEquals(Objects.isNull(lst), false);
         Assert.assertEquals(lst.size(), 3);
         //todo
