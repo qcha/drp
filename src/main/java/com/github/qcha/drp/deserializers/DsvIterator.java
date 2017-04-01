@@ -2,7 +2,6 @@ package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.DsvPreference;
 import lombok.NonNull;
-import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.supercsv.io.CsvListReader;
@@ -17,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class DsvIterator implements Iterator<List<String>> {
+public class DsvIterator implements Iterator<List<String>> {
     private static final Logger logger = LogManager.getLogger();
 
     private final ICsvListReader reader;
@@ -33,11 +32,6 @@ public abstract class DsvIterator implements Iterator<List<String>> {
                 preference.getDelimiter(),
                 preference.getLineSeparator()
         ).build();
-
-        //fixme bug with archives with more then 1 file
-        if (is instanceof ArchiveInputStream) {
-            ((ArchiveInputStream) is).getNextEntry();
-        }
 
         reader = new CsvListReader(new BufferedReader(new InputStreamReader(is, preference.getEncoding()), bufferSize), csvPreference);
         current = reader.read();
