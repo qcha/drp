@@ -7,13 +7,12 @@ import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
 public class DsvCompressedArchivedFileDsvDeserializer extends ArchiveDsvDeserializer {
 
-    public DsvCompressedArchivedFileDsvDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws IOException, ArchiveException, CompressorException {
+    public DsvCompressedArchivedFileDsvDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws ArchiveException, CompressorException {
         super(new ArchiveStreamFactory().createArchiveInputStream(
                 preference.getArchiveType().name(),
                 new CompressorStreamFactory().createCompressorInputStream(

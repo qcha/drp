@@ -5,7 +5,6 @@ import lombok.NonNull;
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
@@ -14,7 +13,7 @@ import java.util.Objects;
  */
 public class DsvArchivedFileDeserializer extends ArchiveDsvDeserializer {
 
-    public DsvArchivedFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws IOException, ArchiveException {
+    public DsvArchivedFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws ArchiveException {
         super(new ArchiveStreamFactory().createArchiveInputStream(preference.getArchiveType().name(), is), preference);
 
         if (Objects.isNull(preference.getArchiveType())) {

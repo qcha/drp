@@ -13,10 +13,15 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
     private DsvIterator iterator;
     private ArchiveInputStream ais;
 
-    public ArchiveDsvDeserializer(@NotNull final ArchiveInputStream ais, @NonNull final DsvPreference preference) throws IOException {
+    public ArchiveDsvDeserializer(@NotNull final ArchiveInputStream ais, @NonNull final DsvPreference preference) {
         this.ais = ais;
         //get first entry in archive
-        ais.getNextEntry();
+        try {
+            ais.getNextEntry();
+        } catch (IOException e) {
+            //todo logging
+            throw new RuntimeException("Error while reading: {}", e);
+        }
         this.iterator = new DsvIterator(ais, preference);
     }
 

@@ -16,25 +16,30 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class DsvIterator implements Iterator<List<String>> {
+public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     private static final Logger logger = LogManager.getLogger();
 
     private final ICsvListReader reader;
     private List<String> current;
 
-    public DsvIterator(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws IOException {
+    DsvIterator(@NonNull final InputStream is, @NonNull final DsvPreference preference) {
         this(is, 8192, preference);
     }
 
-    public DsvIterator(@NonNull final InputStream is, final int bufferSize, @NonNull final DsvPreference preference) throws IOException {
+    DsvIterator(@NonNull final InputStream is, final int bufferSize, @NonNull final DsvPreference preference) {
         final CsvPreference csvPreference = new CsvPreference.Builder(
                 preference.getQuotes(),
                 preference.getDelimiter(),
                 preference.getLineSeparator()
         ).build();
 
-        reader = new CsvListReader(new BufferedReader(new InputStreamReader(is, preference.getEncoding()), bufferSize), csvPreference);
-        current = reader.read();
+        try {
+            reader = new CsvListReader(new BufferedReader(new InputStreamReader(is, preference.getEncoding()), bufferSize), csvPreference);
+            current = reader.read();
+        } catch (IOException e) {
+            logger.error("Error while reading: {}", e);
+            throw new RuntimeException("Error while reading.", e);
+        }
     }
 
     @Override
@@ -49,8 +54,13 @@ public class DsvIterator implements Iterator<List<String>> {
             current = reader.read();
             return before;
         } catch (IOException e) {
-            logger.error("Error while reading!");
-            return null;
+            logger.error("Error while reading: {}", e);
+            throw new RuntimeException("Errors while reading.", e);
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+        reader.close();
     }
 }
