@@ -23,10 +23,10 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     private List<String> current;
 
     DsvIterator(@NonNull final InputStream is, @NonNull final DsvPreference preference) {
-        this(is, 8192, preference);
+        this(is, preference, 8192);
     }
 
-    DsvIterator(@NonNull final InputStream is, final int bufferSize, @NonNull final DsvPreference preference) {
+    DsvIterator(@NonNull final InputStream is, @NonNull final DsvPreference preference, final int bufferSize) {
         final CsvPreference csvPreference = new CsvPreference.Builder(
                 preference.getQuotes(),
                 preference.getDelimiter(),
@@ -38,7 +38,7 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
             current = reader.read();
         } catch (IOException e) {
             logger.error("Error while reading: {}", e);
-            throw new RuntimeException("Error while reading.", e);
+            throw new DsvDeserializingException("Error while reading.", e);
         }
     }
 
@@ -55,7 +55,7 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
             return before;
         } catch (IOException e) {
             logger.error("Error while reading: {}", e);
-            throw new RuntimeException("Errors while reading.", e);
+            throw new DsvDeserializingException("Errors while reading.", e);
         }
     }
 

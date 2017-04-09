@@ -17,8 +17,8 @@ public class DsvFileDeserializer implements DsvDeserializer {
         this.iterator = new DsvIterator(is, preference);
     }
 
-    public DsvFileDeserializer(@NonNull final InputStream is, final int bufferSize, @NonNull final DsvPreference preference) {
-        this.iterator = new DsvIterator(is, bufferSize, preference);
+    public DsvFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference, final int bufferSize) {
+        this.iterator = new DsvIterator(is, preference, bufferSize);
     }
 
     @Override

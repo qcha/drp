@@ -20,7 +20,7 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
             ais.getNextEntry();
         } catch (IOException e) {
             //todo logging
-            throw new RuntimeException("Error while reading: {}", e);
+            throw new DsvDeserializingException("Error while reading: {}", e);
         }
         this.iterator = new DsvIterator(ais, preference);
     }
@@ -47,7 +47,7 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
                 }
             }
         } catch (IOException e) {
-            throw new IllegalStateException("Can't do next.", e);
+            throw new DsvDeserializingException("Can't do next.", e);
         }
     }
 }
