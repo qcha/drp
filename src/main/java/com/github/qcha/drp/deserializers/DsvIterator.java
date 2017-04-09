@@ -38,7 +38,7 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
             current = reader.read();
         } catch (IOException e) {
             logger.error("Error while reading: {}", e);
-            throw new DsvDeserializingException("Error while reading.", e);
+            throw new DsvDeserializerException("Error while reading.", e);
         }
     }
 
@@ -55,7 +55,7 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
             return before;
         } catch (IOException e) {
             logger.error("Error while reading: {}", e);
-            throw new DsvDeserializingException("Errors while reading.", e);
+            throw new DsvDeserializerException("Errors while reading.", e);
         }
     }
 
