@@ -11,7 +11,7 @@ import java.util.List;
  * Iterator for plain dsv file.
  */
 public class DsvFileDeserializer implements DsvDeserializer {
-    private DsvIterator iterator;
+    private final DsvIterator iterator;
 
     public DsvFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) {
         this.iterator = new DsvIterator(is, preference);

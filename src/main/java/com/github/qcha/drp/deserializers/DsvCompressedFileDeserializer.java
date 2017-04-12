@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class DsvCompressedFileDeserializer implements DsvDeserializer {
-    private DsvIterator iterator;
+    private final DsvIterator iterator;
 
     public DsvCompressedFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws CompressorException {
         if (Objects.isNull(preference.getCompressType())) {

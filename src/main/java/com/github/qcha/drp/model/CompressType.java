@@ -48,5 +48,5 @@ public enum CompressType {
         this.name = name;
     }
 
-    private String name;
+    private final String name;
 }

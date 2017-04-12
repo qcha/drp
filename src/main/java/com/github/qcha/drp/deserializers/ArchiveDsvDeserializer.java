@@ -14,8 +14,8 @@ import java.util.Objects;
 public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
     private static final Logger logger = LogManager.getLogger();
 
-    private DsvIterator iterator;
-    private ArchiveInputStream ais;
+    private final DsvIterator iterator;
+    private final ArchiveInputStream ais;
 
     ArchiveDsvDeserializer(@NotNull final ArchiveInputStream ais, @NonNull final DsvPreference preference) {
         this.ais = ais;

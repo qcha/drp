@@ -39,7 +39,7 @@ public enum ArchiveType {
     SEVEN_Z("7z");
 
 
-    private String name;
+    private final String name;
 
     ArchiveType(String name) {
         this.name = name;

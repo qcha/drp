@@ -50,9 +50,11 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     @Override
     public List<String> next() {
         try {
-            final List<String> before = current;
+            List<String> before = current;
             current = reader.read();
+
             return before;
+
         } catch (IOException e) {
             logger.error("Error while reading: {}", e);
             throw new DsvDeserializerException("Errors while reading.", e);
