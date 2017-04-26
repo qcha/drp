@@ -21,7 +21,7 @@ public class DsvFileResource {
         this.preference = preference;
     }
 
-    public DsvFileResource(URI uri, char delimiter, String encoding, String lineSeparator, char quotes, ArchiveType archiveType, CompressType compressType) {
+    public DsvFileResource(URI uri, char delimiter, char quotes, String encoding, String lineSeparator, ArchiveType archiveType, CompressType compressType) {
         this(uri, new DsvPreference(delimiter, quotes, encoding, lineSeparator, archiveType, compressType));
     }
 
@@ -29,7 +29,7 @@ public class DsvFileResource {
         this(uri, new DsvPreference());
     }
 
-    public DsvFileResource(URI uri, char delimiter, ArchiveType archiveType, CompressType compressType) {
+    public DsvFileResource(URI uri, ArchiveType archiveType, CompressType compressType) {
         this(uri, new DsvPreference(archiveType, compressType));
     }
 }
