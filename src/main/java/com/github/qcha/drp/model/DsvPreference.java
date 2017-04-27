@@ -1,16 +1,10 @@
 package com.github.qcha.drp.model;
 
-
+import static com.github.qcha.drp.Constants.DsvPreference.*;
 import lombok.Getter;
 
 @Getter
 public class DsvPreference {
-    private static final char DEFAULT_DELIMITER = ';';
-    private static final char DEFAULT_QUOTES = '"';
-    private static final String DEFAULT_CHARSET = "UTF-8";
-    private static final String DEFAULT_LINE_SEPARATOR = System.lineSeparator();
-    private static final ArchiveType DEFAULT_ARCHIVE_TYPE = null;
-    private static final CompressType DEFAULT_COMPRESS_TYPE = null;
 
     private final char delimiter;
     private final char quotes;
