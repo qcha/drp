@@ -2,12 +2,13 @@ package com.github.qcha.drp.model;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.net.URI;
 
-import static com.github.qcha.drp.Constants.DsvFileResourceTest.*;
 import static com.github.qcha.drp.Constants.DsvPreference.*;
 
 public class DsvFileResourceTest {
+    private static final String DEFAULT_URI = "file:///path/to/file.txt";
 
     @Test
     public void createResourceWithDefaultPreferences() throws Exception {
@@ -23,7 +24,7 @@ public class DsvFileResourceTest {
     }
 
     @Test
-    public void createResourceWithArchiveAndCompress() throws Exception {
+    public void createResourceWithArchiveAndCompressPreferences() throws Exception {
         final DsvFileResource resource = new DsvFileResource(
                 URI.create(DEFAULT_URI),
                 ArchiveType.AR,
@@ -40,7 +41,7 @@ public class DsvFileResourceTest {
     }
 
     @Test
-    public void createResourceWithPreferences() throws Exception {
+    public void createResourceWithFullPreferences() throws Exception {
         final DsvFileResource resource = new DsvFileResource(
                 URI.create(DEFAULT_URI),
                 ',',
