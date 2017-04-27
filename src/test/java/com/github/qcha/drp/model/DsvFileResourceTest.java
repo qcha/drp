@@ -1,40 +1,47 @@
 package com.github.qcha.drp.model;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.net.URI;
 
 public class DsvFileResourceTest {
-
-    private static final char DEFAULT_QUOTES = '\'';
-    private static final char DEFAULT_DELIMITER = ',';
+    private static final char DEFAULT_QUOTES = '"';
+    private static final char DEFAULT_DELIMITER = ';';
     private static final String DEFAULT_LINE_SEPARATOR = System.lineSeparator();
-    private static final String DEFAULT_CHARSET = "UTF-16";
-    private static final ArchiveType DEFAULT_ARCHIVE_TYPE = ArchiveType.AR;
-    private static final CompressType DEFAULT_COMPRESS_TYPE = CompressType.BZIP2;
-    private static final String DEFAULT_PATH = "file:///path/to/file.txt";
+    private static final String DEFAULT_CHARSET = "UTF-8";
+    private static final ArchiveType DEFAULT_ARCHIVE_TYPE = null;
+    private static final CompressType DEFAULT_COMPRESS_TYPE = null;
+    private static final String TEST_URI = "file:///path/to/file.txt";
 
-    @Test
-    public void createResourceWithDefaultPreferences() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(URI.create(DEFAULT_PATH));
-        Assert.assertEquals(DEFAULT_PATH, resource.getUri().toString());
-        Assert.assertEquals(';', resource.getPreference().getDelimiter());
-        Assert.assertEquals('"', resource.getPreference().getQuotes());
-        Assert.assertEquals("UTF-8", resource.getPreference().getEncoding());
-        Assert.assertEquals(System.lineSeparator(), resource.getPreference().getLineSeparator());
-        Assert.assertEquals(null, resource.getPreference().getArchiveType());
-        Assert.assertEquals(null, resource.getPreference().getCompressType());
+    @Before
+    public void setUp() throws Exception {
+        //todo get default values from DsvPreference by Reflection
     }
 
     @Test
-    public void createResourceWithArchiveAndCompress() throws Exception{
+    public void createResourceWithDefaultPreferences() throws Exception {
+        final DsvFileResource resource = new DsvFileResource(URI.create(TEST_URI));
+
+        Assert.assertEquals(TEST_URI, resource.getUri().toString());
+        Assert.assertEquals(DEFAULT_DELIMITER, resource.getPreference().getDelimiter());
+        Assert.assertEquals(DEFAULT_QUOTES, resource.getPreference().getQuotes());
+        Assert.assertEquals(DEFAULT_CHARSET, resource.getPreference().getEncoding());
+        Assert.assertEquals(DEFAULT_LINE_SEPARATOR, resource.getPreference().getLineSeparator());
+        Assert.assertEquals(DEFAULT_ARCHIVE_TYPE, resource.getPreference().getArchiveType());
+        Assert.assertEquals(DEFAULT_COMPRESS_TYPE, resource.getPreference().getCompressType());
+    }
+
+    //todo rewrite
+    @Test
+    public void createResourceWithArchiveAndCompress() throws Exception {
         final DsvFileResource resource = new DsvFileResource(
-                URI.create(DEFAULT_PATH),
+                URI.create(TEST_URI),
                 DEFAULT_ARCHIVE_TYPE,
                 DEFAULT_COMPRESS_TYPE
         );
-        Assert.assertEquals(DEFAULT_PATH, resource.getUri().toString());
+        Assert.assertEquals(TEST_URI, resource.getUri().toString());
         Assert.assertEquals(DEFAULT_ARCHIVE_TYPE, resource.getPreference().getArchiveType());
         Assert.assertEquals(';', resource.getPreference().getDelimiter());
         Assert.assertEquals('"', resource.getPreference().getQuotes());
@@ -43,10 +50,11 @@ public class DsvFileResourceTest {
         Assert.assertEquals(DEFAULT_COMPRESS_TYPE, resource.getPreference().getCompressType());
     }
 
+    //todo rewrite
     @Test
-    public void createResourceWithPreferences() throws Exception{
+    public void createResourceWithPreferences() throws Exception {
         final DsvFileResource resource = new DsvFileResource(
-                URI.create(DEFAULT_PATH),
+                URI.create(TEST_URI),
                 DEFAULT_DELIMITER,
                 DEFAULT_QUOTES,
                 DEFAULT_CHARSET,
@@ -54,7 +62,7 @@ public class DsvFileResourceTest {
                 DEFAULT_ARCHIVE_TYPE,
                 DEFAULT_COMPRESS_TYPE
         );
-        Assert.assertEquals(DEFAULT_PATH, resource.getUri().toString());
+        Assert.assertEquals(TEST_URI, resource.getUri().toString());
         Assert.assertEquals(DEFAULT_DELIMITER, resource.getPreference().getDelimiter());
         Assert.assertEquals(DEFAULT_QUOTES, resource.getPreference().getQuotes());
         Assert.assertEquals(DEFAULT_CHARSET, resource.getPreference().getEncoding());
