@@ -16,7 +16,7 @@ public class DsvFileResource {
     @NonNull
     private final DsvPreference preference;
 
-    private DsvFileResource(URI uri, DsvPreference preference) {
+    private DsvFileResource(@NonNull URI uri, @NonNull DsvPreference preference) {
         this.uri = uri;
         this.preference = preference;
     }

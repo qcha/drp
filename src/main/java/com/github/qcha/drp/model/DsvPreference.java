@@ -2,6 +2,7 @@ package com.github.qcha.drp.model;
 
 import static com.github.qcha.drp.Constants.DsvPreference.*;
 import lombok.Getter;
+import lombok.NonNull;
 
 @Getter
 public class DsvPreference {
@@ -13,7 +14,7 @@ public class DsvPreference {
     private final ArchiveType archiveType;
     private final CompressType compressType;
 
-    public DsvPreference(char delimiter, char quotes, String encoding, String lineSeparator, ArchiveType archiveType, CompressType compressType) {
+    public DsvPreference(char delimiter, char quotes,@NonNull String encoding,@NonNull String lineSeparator, ArchiveType archiveType, CompressType compressType) {
         this.delimiter = delimiter;
         this.quotes = quotes;
         this.encoding = encoding;
@@ -23,20 +24,24 @@ public class DsvPreference {
     }
 
     public DsvPreference() {
-        delimiter = DEFAULT_DELIMITER;
-        quotes = DEFAULT_QUOTES;
-        encoding = DEFAULT_CHARSET;
-        lineSeparator = DEFAULT_LINE_SEPARATOR;
-        archiveType = DEFAULT_ARCHIVE_TYPE;
-        compressType = DEFAULT_COMPRESS_TYPE;
+        this(
+                DEFAULT_DELIMITER,
+                DEFAULT_QUOTES,
+                DEFAULT_CHARSET,
+                DEFAULT_LINE_SEPARATOR,
+                DEFAULT_ARCHIVE_TYPE,
+                DEFAULT_COMPRESS_TYPE
+        );
     }
 
     public DsvPreference(ArchiveType archiveType, CompressType compressType) {
-        delimiter = DEFAULT_DELIMITER;
-        quotes = DEFAULT_QUOTES;
-        encoding = DEFAULT_CHARSET;
-        lineSeparator = DEFAULT_LINE_SEPARATOR;
-        this.archiveType = archiveType;
-        this.compressType = compressType;
+        this(
+                DEFAULT_DELIMITER,
+                DEFAULT_QUOTES,
+                DEFAULT_CHARSET,
+                DEFAULT_LINE_SEPARATOR,
+                archiveType,
+                compressType
+        );
     }
 }
