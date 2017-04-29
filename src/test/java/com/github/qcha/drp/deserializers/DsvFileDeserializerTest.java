@@ -46,4 +46,55 @@ public class DsvFileDeserializerTest {
 
         Assert.assertEquals(Objects.isNull(lst), true);
     }
+
+    @Test
+    public void parseTestFileWithFourLines(){
+        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("test_4_lines.csv"), new DsvPreference());
+
+        Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
+
+        List<String> lst = dsvFileDeserializer.next();
+
+        Assert.assertEquals(Objects.isNull(lst), false);
+        Assert.assertEquals(lst.size(), 3);
+        Assert.assertEquals(lst.get(0), "value11");
+        Assert.assertEquals(lst.get(1), "value12");
+        Assert.assertEquals(lst.get(2), "value13");
+
+        Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
+
+        lst = dsvFileDeserializer.next();
+
+        Assert.assertEquals(Objects.isNull(lst), false);
+        Assert.assertEquals(lst.size(), 3);
+        Assert.assertEquals(lst.get(0), "value21");
+        Assert.assertEquals(lst.get(1), "value22");
+        Assert.assertEquals(lst.get(2), null);
+
+        Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
+
+        lst = dsvFileDeserializer.next();
+
+        Assert.assertEquals(Objects.isNull(lst), false);
+        Assert.assertEquals(lst.size(), 3);
+        Assert.assertEquals(lst.get(0), "value31");
+        Assert.assertEquals(lst.get(1), null);
+        Assert.assertEquals(lst.get(2), "value33");
+
+        Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
+
+        lst = dsvFileDeserializer.next();
+
+        Assert.assertEquals(Objects.isNull(lst), false);
+        Assert.assertEquals(lst.size(), 3);
+        Assert.assertEquals(lst.get(0), null);
+        Assert.assertEquals(lst.get(1), "value42");
+        Assert.assertEquals(lst.get(2), null);
+
+        Assert.assertEquals(dsvFileDeserializer.hasNext(), false);
+
+        lst = dsvFileDeserializer.next();
+
+        Assert.assertEquals(Objects.isNull(lst), true);
+    }
 }
