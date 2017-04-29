@@ -31,4 +31,9 @@ public class DsvCompressedFileDeserializer implements DsvDeserializer {
     public List<String> next() {
         return iterator.next();
     }
+
+    @Override
+    public void close() throws Exception {
+        iterator.close();
+    }
 }

@@ -20,4 +20,5 @@ public class DsvArchivedFileDeserializer extends ArchiveDsvDeserializer {
             throw new IllegalArgumentException("ArchiveType can't be null.");
         }
     }
+
 }

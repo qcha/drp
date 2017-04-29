@@ -55,4 +55,9 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
             throw new DsvDeserializerException("Can't do next.", e);
         }
     }
+
+    @Override
+    public void close() throws IOException {
+        iterator.close();
+    }
 }
