@@ -7,6 +7,7 @@ import lombok.NonNull;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
@@ -33,7 +34,9 @@ public class DsvCompressedFileDeserializer implements DsvDeserializer {
     }
 
     @Override
-    public void close() throws Exception {
-        iterator.close();
+    public void close() throws IOException {
+        if (Objects.nonNull(iterator)) {
+            iterator.close();
+        }
     }
 }

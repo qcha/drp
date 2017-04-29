@@ -1,7 +1,6 @@
 package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.DsvPreference;
-import com.sun.istack.internal.NotNull;
 import lombok.NonNull;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +16,7 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
     private final DsvIterator iterator;
     private final ArchiveInputStream ais;
 
-    ArchiveDsvDeserializer(@NotNull final ArchiveInputStream ais, @NonNull final DsvPreference preference) {
+    ArchiveDsvDeserializer(@NonNull final ArchiveInputStream ais, @NonNull final DsvPreference preference) {
         this.ais = ais;
         //get first entry in archive
         try {
@@ -58,6 +57,8 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
 
     @Override
     public void close() throws IOException {
-        iterator.close();
+        if (Objects.nonNull(iterator)) {
+            iterator.close();
+        }
     }
 }

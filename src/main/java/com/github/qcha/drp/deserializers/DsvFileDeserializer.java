@@ -4,8 +4,10 @@ package com.github.qcha.drp.deserializers;
 import com.github.qcha.drp.model.DsvPreference;
 import lombok.NonNull;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Iterator for plain dsv file.
@@ -32,7 +34,7 @@ public class DsvFileDeserializer implements DsvDeserializer {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws IOException {
         iterator.close();
     }
 }
