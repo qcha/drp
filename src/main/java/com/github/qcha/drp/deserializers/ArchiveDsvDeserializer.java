@@ -28,11 +28,13 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
         this.iterator = new DsvIterator(ais, preference);
     }
 
+    //fixme
     @Override
     public boolean hasNext() {
         return iterator.hasNext();
     }
 
+    //fixme
     @Override
     public List<String> next() {
         try {
