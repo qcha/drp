@@ -19,7 +19,7 @@ public class DsvFileDeserializerTest {
 
     @Test
     public void parseTestFileWithTwoLines(){
-        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("test_2_lines.csv"), new DsvPreference());
+        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("archive_with_2_lines.csv"), new DsvPreference());
 
         Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
         List<String> lst = dsvFileDeserializer.next();
@@ -44,15 +44,14 @@ public class DsvFileDeserializerTest {
 
         //nothing else
         Assert.assertEquals(dsvFileDeserializer.hasNext(), false);
-        lst = dsvFileDeserializer.next();
-
-        Assert.assertEquals(Objects.isNull(lst), true);
+        Assert.assertEquals(Objects.isNull(dsvFileDeserializer.next()), true);
     }
 
     @Test
     public void parseTestFileWithFourLines(){
-        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("test_4_lines.csv"), new DsvPreference());
+        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("archive_with_4_lines.csv"), new DsvPreference());
 
+        //check first line
         Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
         List<String> lst = dsvFileDeserializer.next();
 
@@ -98,8 +97,6 @@ public class DsvFileDeserializerTest {
 
         //nothing else
         Assert.assertEquals(dsvFileDeserializer.hasNext(), false);
-        lst = dsvFileDeserializer.next();
-
-        Assert.assertEquals(Objects.isNull(lst), true);
+        Assert.assertEquals(Objects.isNull(dsvFileDeserializer.next()), true);
     }
 }

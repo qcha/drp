@@ -28,33 +28,30 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
         this.iterator = new DsvIterator(ais, preference);
     }
 
-    //fixme
     @Override
     public boolean hasNext() {
-        return iterator.hasNext();
-    }
-
-    //fixme
-    @Override
-    public List<String> next() {
         try {
-            List<String> res = iterator.next();
-            if (Objects.nonNull(res)) {
-                return res;
+            if (iterator.hasNext()) {
+                return true;
             } else {
                 //move entry
                 if (Objects.nonNull(ais.getNextEntry())) {
                     //skip current null last entry
                     iterator.next();
-                    return iterator.next();
-                } else {
-                    return null;
+                    return iterator.hasNext();
                 }
+
+                return false;
             }
         } catch (IOException e) {
             logger.error("Error while reading: {}", e);
             throw new DsvDeserializerException("Can't do next.", e);
         }
+    }
+
+    @Override
+    public List<String> next() {
+        return iterator.next();
     }
 
     @Override
