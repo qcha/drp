@@ -19,7 +19,7 @@ public class DsvFileDeserializerTest {
 
     @Test
     public void parseTestFileWithTwoLines(){
-        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("archive_with_2_lines.csv"), new DsvPreference());
+        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("file_with_2_lines.csv"), new DsvPreference());
 
         Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
         List<String> lst = dsvFileDeserializer.next();
@@ -49,7 +49,7 @@ public class DsvFileDeserializerTest {
 
     @Test
     public void parseTestFileWithFourLines(){
-        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("archive_with_4_lines.csv"), new DsvPreference());
+        dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("file_with_4_lines.csv"), new DsvPreference());
 
         //check first line
         Assert.assertEquals(dsvFileDeserializer.hasNext(), true);

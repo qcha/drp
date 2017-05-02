@@ -34,9 +34,9 @@ public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
             if (iterator.hasNext()) {
                 return true;
             } else {
-                //move entry
+                //try to move entry in archive
                 if (Objects.nonNull(ais.getNextEntry())) {
-                    //skip current null last entry
+                    //skip current null in last entry
                     iterator.next();
                     return iterator.hasNext();
                 }
