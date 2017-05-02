@@ -8,13 +8,13 @@ import java.net.URI;
 import static com.github.qcha.drp.Constants.DsvPreference.*;
 
 public class DsvFileResourceTest {
-    private static final String DEFAULT_URI = "file:///path/to/file.txt";
+    private static final String TEST_URI = "file:///path/to/file.txt";
 
     @Test
     public void createResourceWithDefaultPreferences() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(URI.create(DEFAULT_URI));
+        final DsvFileResource resource = new DsvFileResource(URI.create(TEST_URI));
 
-        Assert.assertEquals(DEFAULT_URI, resource.getUri().toString());
+        Assert.assertEquals(TEST_URI, resource.getUri().toString());
         Assert.assertEquals(DEFAULT_DELIMITER, resource.getPreference().getDelimiter());
         Assert.assertEquals(DEFAULT_QUOTES, resource.getPreference().getQuotes());
         Assert.assertEquals(DEFAULT_CHARSET, resource.getPreference().getEncoding());
@@ -26,12 +26,12 @@ public class DsvFileResourceTest {
     @Test
     public void createResourceWithArchiveAndCompressPreferences() throws Exception {
         final DsvFileResource resource = new DsvFileResource(
-                URI.create(DEFAULT_URI),
+                URI.create(TEST_URI),
                 ArchiveType.AR,
                 CompressType.BZIP2
         );
 
-        Assert.assertEquals(DEFAULT_URI, resource.getUri().toString());
+        Assert.assertEquals(TEST_URI, resource.getUri().toString());
         Assert.assertEquals(DEFAULT_DELIMITER, resource.getPreference().getDelimiter());
         Assert.assertEquals(DEFAULT_QUOTES, resource.getPreference().getQuotes());
         Assert.assertEquals(DEFAULT_CHARSET, resource.getPreference().getEncoding());
@@ -43,7 +43,7 @@ public class DsvFileResourceTest {
     @Test
     public void createResourceWithFullPreferences() throws Exception {
         final DsvFileResource resource = new DsvFileResource(
-                URI.create(DEFAULT_URI),
+                URI.create(TEST_URI),
                 ',',
                 '\'',
                 "UTF-8",
@@ -52,7 +52,7 @@ public class DsvFileResourceTest {
                 CompressType.BZIP2
         );
 
-        Assert.assertEquals(DEFAULT_URI, resource.getUri().toString());
+        Assert.assertEquals(TEST_URI, resource.getUri().toString());
         Assert.assertEquals(',', resource.getPreference().getDelimiter());
         Assert.assertEquals('\'', resource.getPreference().getQuotes());
         Assert.assertEquals("UTF-8", resource.getPreference().getEncoding());
