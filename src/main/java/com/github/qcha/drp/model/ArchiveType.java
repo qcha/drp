@@ -39,9 +39,9 @@ public enum ArchiveType {
     SEVEN_Z("7z");
 
 
-    private final String name;
+    private final String abbreviation;
 
-    ArchiveType(String name) {
-        this.name = name;
+    ArchiveType(String abbreviation) {
+        this.abbreviation = abbreviation;
     }
 }

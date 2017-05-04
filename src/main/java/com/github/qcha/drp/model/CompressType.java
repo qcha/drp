@@ -44,9 +44,9 @@ public enum CompressType {
      */
     Z("z");
 
-    CompressType(String name) {
-        this.name = name;
+    CompressType(String abbreviation) {
+        this.abbreviation = abbreviation;
     }
 
-    private final String name;
+    private final String abbreviation;
 }

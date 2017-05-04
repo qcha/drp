@@ -20,7 +20,7 @@ public class DsvCompressedFileDeserializer implements DsvDeserializer {
             throw new IllegalArgumentException("CompressType can't be null.");
         }
 
-        this.iterator = new DsvIterator(new CompressorStreamFactory().createCompressorInputStream(preference.getCompressType().name(), is), preference);
+        this.iterator = new DsvIterator(new CompressorStreamFactory().createCompressorInputStream(preference.getCompressType().getAbbreviation(), is), preference);
     }
 
     @Override

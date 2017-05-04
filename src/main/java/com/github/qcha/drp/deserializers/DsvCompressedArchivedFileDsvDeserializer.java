@@ -16,7 +16,7 @@ public class DsvCompressedArchivedFileDsvDeserializer extends ArchiveDsvDeserial
         super(new ArchiveStreamFactory().createArchiveInputStream(
                 preference.getArchiveType().name(),
                 new CompressorStreamFactory().createCompressorInputStream(
-                        preference.getCompressType().name(),
+                        preference.getCompressType().getAbbreviation(),
                         is)), preference);
 
         if (Objects.isNull(preference.getArchiveType())) {
