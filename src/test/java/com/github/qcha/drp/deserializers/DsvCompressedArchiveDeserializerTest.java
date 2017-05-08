@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class DsvCompressedArchiveDeserializerTest {
-    private DsvCompressedArchiveDeserializer iterator;
+    private DsvArchiveDeserializer iterator;
     private List<String> lst;
 
     @After
@@ -21,7 +21,7 @@ public class DsvCompressedArchiveDeserializerTest {
 
     @Test
     public void parseArchiveWithOnlyOneFileWithTwoLines() throws Exception {
-        iterator = new DsvCompressedArchiveDeserializer(
+        iterator = new DsvArchiveDeserializer(
                 getClass().getResourceAsStream("compressed_archive_with_1_file.tar.gz"),
                 new DsvPreference(ArchiveType.TAR, CompressType.GZIP)
         );
@@ -56,7 +56,7 @@ public class DsvCompressedArchiveDeserializerTest {
 
     @Test
     public void parseArchiveWithOnlyOneFileWithFourLines() throws Exception {
-        iterator = new DsvCompressedArchiveDeserializer(
+        iterator = new DsvArchiveDeserializer(
                 getClass().getResourceAsStream("compressed_archive_with_1_file_with_4_lines.tar.gz"),
                 new DsvPreference(ArchiveType.TAR, CompressType.GZIP)
         );
@@ -115,7 +115,7 @@ public class DsvCompressedArchiveDeserializerTest {
 
     @Test
     public void parseArchiveWithTwoFilesInside() throws Exception {
-        iterator = new DsvCompressedArchiveDeserializer(
+        iterator = new DsvArchiveDeserializer(
                 getClass().getResourceAsStream("compressed_archive_with_2_files.tar.gz"),
                 new DsvPreference(ArchiveType.TAR, CompressType.GZIP)
         );
@@ -200,7 +200,7 @@ public class DsvCompressedArchiveDeserializerTest {
 
     @Test
     public void parseArchiveWithOnlyOneFileInsideBz2() throws Exception {
-        iterator = new DsvCompressedArchiveDeserializer(
+        iterator = new DsvArchiveDeserializer(
                 getClass().getResourceAsStream("compressed_archive_with_1_file_bz2.tar.bz2"),
                 new DsvPreference(ArchiveType.TAR, CompressType.BZIP2)
         );

@@ -1,20 +1,27 @@
 package com.github.qcha.drp.model;
 
-import static com.github.qcha.drp.Constants.DsvPreference.*;
 import lombok.Getter;
 import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import static com.github.qcha.drp.Constants.DsvPreference.*;
 
 @Getter
 public class DsvPreference {
 
     private final char delimiter;
     private final char quotes;
+    @NotNull
     private final String encoding;
+    @NotNull
     private final String lineSeparator;
+    @Nullable
     private final ArchiveType archiveType;
+    @Nullable
     private final CompressType compressType;
 
-    public DsvPreference(char delimiter, char quotes,@NonNull String encoding,@NonNull String lineSeparator, ArchiveType archiveType, CompressType compressType) {
+    public DsvPreference(char delimiter, char quotes, @NotNull String encoding, @NotNull String lineSeparator, @Nullable ArchiveType archiveType, @Nullable CompressType compressType) {
         this.delimiter = delimiter;
         this.quotes = quotes;
         this.encoding = encoding;

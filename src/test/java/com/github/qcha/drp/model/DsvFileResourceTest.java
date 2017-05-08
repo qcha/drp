@@ -61,17 +61,17 @@ public class DsvFileResourceTest {
         Assert.assertEquals(CompressType.BZIP2, resource.getPreference().getCompressType());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void createResourceWithNullUri() throws Exception {
         final DsvFileResource resource = new DsvFileResource(null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void createResourceWithNullUriNullArchiveAndCompress() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(null, null,null);
+        final DsvFileResource resource = new DsvFileResource(null, null, null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void createResourceWithNullUriAndNullPrefernce() throws Exception {
         final DsvFileResource resource = new DsvFileResource(null, ' ', ' ', null, null, null, null);
     }

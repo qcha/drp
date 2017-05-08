@@ -1,9 +1,9 @@
 package com.github.qcha.drp.model;
 
 import lombok.Getter;
-import lombok.NonNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URI;
 
@@ -11,12 +11,12 @@ import java.net.URI;
 public class DsvFileResource {
     private static final Logger logger = LogManager.getLogger();
 
-    @NonNull
+    @NotNull
     private final URI uri;
-    @NonNull
+    @NotNull
     private final DsvPreference preference;
 
-    private DsvFileResource(@NonNull URI uri, @NonNull DsvPreference preference) {
+    private DsvFileResource(@NotNull URI uri, @NotNull DsvPreference preference) {
         this.uri = uri;
         this.preference = preference;
     }
