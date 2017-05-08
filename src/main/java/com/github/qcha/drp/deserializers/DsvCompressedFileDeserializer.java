@@ -1,9 +1,9 @@
 package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.DsvPreference;
-import lombok.NonNull;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +13,7 @@ import java.util.Objects;
 public class DsvCompressedFileDeserializer implements DsvDeserializer {
     private final DsvIterator iterator;
 
-    public DsvCompressedFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws CompressorException {
+    public DsvCompressedFileDeserializer(@NotNull final InputStream is, @NotNull final DsvPreference preference) throws CompressorException {
         if (Objects.isNull(preference.getCompressType())) {
             throw new IllegalArgumentException("CompressType can't be null.");
         }

@@ -2,12 +2,11 @@ package com.github.qcha.drp.deserializers;
 
 
 import com.github.qcha.drp.model.DsvPreference;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Iterator for plain dsv file.
@@ -15,11 +14,11 @@ import java.util.Objects;
 public class DsvFileDeserializer implements DsvDeserializer {
     private final DsvIterator iterator;
 
-    public DsvFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) {
+    public DsvFileDeserializer(@NotNull final InputStream is, @NotNull final DsvPreference preference) {
         this.iterator = new DsvIterator(is, preference);
     }
 
-    public DsvFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference, final int bufferSize) {
+    public DsvFileDeserializer(@NotNull final InputStream is, @NotNull final DsvPreference preference, final int bufferSize) {
         this.iterator = new DsvIterator(is, preference, bufferSize);
     }
 

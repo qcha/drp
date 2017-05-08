@@ -1,14 +1,14 @@
 package com.github.qcha.drp.deserializers;
 
 
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class DsvDeserializerException extends RuntimeException {
-    DsvDeserializerException(@NonNull String message) {
+    DsvDeserializerException(@NotNull String message) {
         super(message);
     }
 
-    DsvDeserializerException(@NonNull String message, @NonNull Throwable cause) {
+    DsvDeserializerException(@NotNull String message, @NotNull Throwable cause) {
         super(message, cause);
     }
 }
