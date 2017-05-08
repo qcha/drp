@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
-public class FtpsConnection implements IFtpConnection {
+public class FtpsConnection implements FtpConnection {
     private static final Logger logger = LogManager.getLogger();
 
     private static final String DEFAULT_PROTOCOL = "TLS";
