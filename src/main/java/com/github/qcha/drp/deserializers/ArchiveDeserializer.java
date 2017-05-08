@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class ArchiveDsvDeserializer implements DsvDeserializer {
+public abstract class ArchiveDeserializer implements DsvDeserializer {
     private static final Logger logger = LogManager.getLogger();
 
     private final DsvIterator iterator;
     private final ArchiveInputStream ais;
 
-    ArchiveDsvDeserializer(@NonNull final ArchiveInputStream ais, @NonNull final DsvPreference preference) {
+    ArchiveDeserializer(@NonNull final ArchiveInputStream ais, @NonNull final DsvPreference preference) {
         this.ais = ais;
         //get first entry in archive
         try {

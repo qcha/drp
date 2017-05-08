@@ -1,6 +1,7 @@
 package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.ArchiveType;
+import com.github.qcha.drp.model.CompressType;
 import com.github.qcha.drp.model.DsvPreference;
 import org.junit.After;
 import org.junit.Assert;
@@ -9,8 +10,8 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Objects;
 
-public class DsvArchivedFileDeserializerTest {
-    private DsvArchivedFileDeserializer iterator;
+public class DsvCompressedArchiveDeserializerTest {
+    private DsvCompressedArchiveDeserializer iterator;
     private List<String> lst;
 
     @After
@@ -19,10 +20,45 @@ public class DsvArchivedFileDeserializerTest {
     }
 
     @Test
-    public void parseArchiveWithOnlyOneFileInside() throws Exception {
-        iterator = new DsvArchivedFileDeserializer(
-                getClass().getResourceAsStream("non_compress_archive_with_1_file.zip"),
-                new DsvPreference(ArchiveType.ZIP, null)
+    public void parseArchiveWithOnlyOneFileWithTwoLines() throws Exception {
+        iterator = new DsvCompressedArchiveDeserializer(
+                getClass().getResourceAsStream("compressed_archive_with_1_file.tar.gz"),
+                new DsvPreference(ArchiveType.TAR, CompressType.GZIP)
+        );
+
+        //more than one string in file
+        Assert.assertEquals(iterator.hasNext(), true);
+
+        //check first string
+        lst = iterator.next();
+
+        Assert.assertEquals(Objects.isNull(lst), false);
+        Assert.assertEquals(lst.size(), 3);
+        Assert.assertEquals(lst.get(0), "value11");
+        Assert.assertEquals(lst.get(1), "value12");
+        Assert.assertEquals(lst.get(2), "value13");
+
+        //more than two strings in file
+        Assert.assertEquals(iterator.hasNext(), true);
+
+        //check second string
+        lst = iterator.next();
+
+        Assert.assertEquals(Objects.isNull(lst), false);
+        Assert.assertEquals(lst.size(), 3);
+        Assert.assertEquals(lst.get(0), null);
+        Assert.assertEquals(lst.get(1), null);
+        Assert.assertEquals(lst.get(2), "value23");
+
+        //more than two strings in file
+        Assert.assertEquals(iterator.hasNext(), false);
+    }
+
+    @Test
+    public void parseArchiveWithOnlyOneFileWithFourLines() throws Exception {
+        iterator = new DsvCompressedArchiveDeserializer(
+                getClass().getResourceAsStream("compressed_archive_with_1_file_with_4_lines.tar.gz"),
+                new DsvPreference(ArchiveType.TAR, CompressType.GZIP)
         );
 
         //more than one string in file
@@ -79,9 +115,9 @@ public class DsvArchivedFileDeserializerTest {
 
     @Test
     public void parseArchiveWithTwoFilesInside() throws Exception {
-        iterator = new DsvArchivedFileDeserializer(
-                getClass().getResourceAsStream("non_compress_archive_with_2_files.zip"),
-                new DsvPreference(ArchiveType.ZIP, null)
+        iterator = new DsvCompressedArchiveDeserializer(
+                getClass().getResourceAsStream("compressed_archive_with_2_files.tar.gz"),
+                new DsvPreference(ArchiveType.TAR, CompressType.GZIP)
         );
 
         //first file with two stings
@@ -163,34 +199,12 @@ public class DsvArchivedFileDeserializerTest {
     }
 
     @Test
-    public void parseEmptyArchive() throws Exception {
-        iterator = new DsvArchivedFileDeserializer(
-                getClass().getResourceAsStream("empty_archive.zip"),
-                new DsvPreference(ArchiveType.ZIP, null)
+    public void parseArchiveWithOnlyOneFileInsideBz2() throws Exception {
+        iterator = new DsvCompressedArchiveDeserializer(
+                getClass().getResourceAsStream("compressed_archive_with_1_file_bz2.tar.bz2"),
+                new DsvPreference(ArchiveType.TAR, CompressType.BZIP2)
         );
 
-        Assert.assertEquals(iterator.hasNext(), false);
-    }
-
-    @Test
-    public void parseArchiveWithOneEmptyFile() throws Exception {
-        iterator = new DsvArchivedFileDeserializer(
-                getClass().getResourceAsStream("non_compress_archive_with_1_empty_file.zip"),
-                new DsvPreference(ArchiveType.ZIP, null)
-        );
-
-        Assert.assertEquals(iterator.hasNext(), false);
-    }
-
-    @Test
-    public void parseArchiveWithOneFileAndOneEmptyFile() throws Exception {
-        iterator = new DsvArchivedFileDeserializer(
-                getClass().getResourceAsStream("non_compress_archive_with_1_empty_file_and_1_non_empty_file.zip"),
-                new DsvPreference(ArchiveType.ZIP, null)
-        );
-
-        //skip first file and get
-        //second file with two stings
         //more than one string in file
         Assert.assertEquals(iterator.hasNext(), true);
 
@@ -203,10 +217,10 @@ public class DsvArchivedFileDeserializerTest {
         Assert.assertEquals(lst.get(1), "value12");
         Assert.assertEquals(lst.get(2), "value13");
 
-        //more than two string in file
+        //more than two strings in file
         Assert.assertEquals(iterator.hasNext(), true);
 
-        //check second file
+        //check second string
         lst = iterator.next();
 
         Assert.assertEquals(Objects.isNull(lst), false);
@@ -215,7 +229,8 @@ public class DsvArchivedFileDeserializerTest {
         Assert.assertEquals(lst.get(1), null);
         Assert.assertEquals(lst.get(2), "value23");
 
-        //more than three strings in file
+        //more than two strings in file
         Assert.assertEquals(iterator.hasNext(), false);
     }
+
 }

@@ -10,9 +10,9 @@ import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import java.io.InputStream;
 import java.util.Objects;
 
-public class DsvCompressedArchivedFileDsvDeserializer extends ArchiveDsvDeserializer {
+public class DsvCompressedArchiveDeserializer extends ArchiveDeserializer {
 
-    public DsvCompressedArchivedFileDsvDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws ArchiveException, CompressorException {
+    public DsvCompressedArchiveDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws ArchiveException, CompressorException {
         super(new ArchiveStreamFactory().createArchiveInputStream(
                 preference.getArchiveType().name(),
                 new CompressorStreamFactory().createCompressorInputStream(

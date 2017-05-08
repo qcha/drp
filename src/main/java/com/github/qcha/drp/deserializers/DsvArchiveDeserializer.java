@@ -11,9 +11,9 @@ import java.util.Objects;
 /**
  * Iterator for archived files, but without compression.
  */
-public class DsvArchivedFileDeserializer extends ArchiveDsvDeserializer {
+public class DsvArchiveDeserializer extends ArchiveDeserializer {
 
-    public DsvArchivedFileDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws ArchiveException {
+    public DsvArchiveDeserializer(@NonNull final InputStream is, @NonNull final DsvPreference preference) throws ArchiveException {
         super(new ArchiveStreamFactory().createArchiveInputStream(preference.getArchiveType().name(), is), preference);
 
         if (Objects.isNull(preference.getArchiveType())) {

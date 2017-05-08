@@ -1,7 +1,5 @@
 package com.github.qcha.drp.deserializers;
 
-import com.github.qcha.drp.deserializers.DsvDeserializer;
-import com.github.qcha.drp.deserializers.DsvIterator;
 import com.github.qcha.drp.model.DsvPreference;
 import lombok.NonNull;
 import org.apache.commons.compress.compressors.CompressorException;
