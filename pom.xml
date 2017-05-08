@@ -33,7 +33,7 @@
         <log4j2.version>2.8</log4j2.version>
         <commons-net.vesion>3.6</commons-net.vesion>
         <jsch.version>0.1.54</jsch.version>
-        <groovy.version>2.4.10</groovy.version>
+        <annotations.version>15.0</annotations.version>
     </properties>
 
     <dependencies>
@@ -96,11 +96,11 @@
             <artifactId>jsch</artifactId>
             <version>${jsch.version}</version>
         </dependency>
-        <!--Groovy-->
+        <!--Annotations-->
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>${groovy.version}</version>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${annotations.version}</version>
         </dependency>
     </dependencies>
 
