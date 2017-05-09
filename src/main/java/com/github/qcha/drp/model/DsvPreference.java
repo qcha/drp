@@ -1,15 +1,13 @@
 package com.github.qcha.drp.model;
 
 import lombok.Getter;
-import lombok.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.github.qcha.drp.Constants.DsvPreference.*;
+import static com.github.qcha.drp.model.DsvDefaultConstants.*;
 
 @Getter
 public class DsvPreference {
-
     private final char delimiter;
     private final char quotes;
     @NotNull

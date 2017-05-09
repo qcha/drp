@@ -5,7 +5,8 @@ import org.junit.Test;
 
 import java.net.URI;
 
-import static com.github.qcha.drp.Constants.DsvPreference.*;
+import static com.github.qcha.drp.model.DsvDefaultConstants.*;
+
 
 public class DsvFileResourceTest {
     private static final String TEST_URI = "file:///path/to/file.txt";
