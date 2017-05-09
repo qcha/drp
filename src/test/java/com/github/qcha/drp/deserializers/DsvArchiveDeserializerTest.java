@@ -15,7 +15,9 @@ public class DsvArchiveDeserializerTest {
 
     @After
     public void tearDown() throws Exception {
-        iterator.close();
+        if (Objects.nonNull(iterator)) {
+            iterator.close();
+        }
     }
 
     @Test
@@ -215,5 +217,21 @@ public class DsvArchiveDeserializerTest {
 
         //more than three strings in file
         Assert.assertEquals(iterator.hasNext(), false);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createIteratorWithNullInputStream() throws Exception {
+        iterator = new DsvArchiveDeserializer(
+                null,
+                new DsvPreference(ArchiveType.ZIP, null)
+        );
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createIteratorWithNullDsvPrefetences() throws Exception {
+        iterator = new DsvArchiveDeserializer(
+                getClass().getResourceAsStream("non_compress_archive_with_1_empty_file_and_1_non_empty_file.zip"),
+                null
+        );
     }
 }
