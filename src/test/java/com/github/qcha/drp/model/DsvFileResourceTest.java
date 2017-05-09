@@ -12,7 +12,7 @@ public class DsvFileResourceTest {
 
     @Test
     public void createResourceWithDefaultPreferences() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(URI.create(TEST_URI));
+        DsvFileResource resource = new DsvFileResource(URI.create(TEST_URI));
 
         Assert.assertEquals(TEST_URI, resource.getUri().toString());
         Assert.assertEquals(DEFAULT_DELIMITER, resource.getPreference().getDelimiter());
@@ -25,7 +25,7 @@ public class DsvFileResourceTest {
 
     @Test
     public void createResourceWithArchiveAndCompressPreferences() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(
+        DsvFileResource resource = new DsvFileResource(
                 URI.create(TEST_URI),
                 ArchiveType.AR,
                 CompressType.BZIP2
@@ -42,7 +42,7 @@ public class DsvFileResourceTest {
 
     @Test
     public void createResourceWithFullPreferences() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(
+        DsvFileResource resource = new DsvFileResource(
                 URI.create(TEST_URI),
                 ',',
                 '\'',
@@ -63,16 +63,16 @@ public class DsvFileResourceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void createResourceWithNullUri() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(null);
+        new DsvFileResource(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createResourceWithNullUriNullArchiveAndCompress() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(null, null, null);
+        new DsvFileResource(null, null, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createResourceWithNullUriAndNullPrefernce() throws Exception {
-        final DsvFileResource resource = new DsvFileResource(null, ' ', ' ', null, null, null, null);
+        new DsvFileResource(null, ' ', ' ', null, null, null, null);
     }
 }

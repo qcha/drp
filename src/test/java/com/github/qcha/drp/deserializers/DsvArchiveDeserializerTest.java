@@ -25,7 +25,7 @@ public class DsvArchiveDeserializerTest {
                 new DsvPreference(ArchiveType.ZIP, null)
         );
 
-        //more than one string in file
+        //is not empty
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check first string
@@ -37,7 +37,7 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), "value12");
         Assert.assertEquals(lst.get(2), "value13");
 
-        //more than two strings in file
+        //more than one string in file
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check second string
@@ -49,7 +49,7 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), "value22");
         Assert.assertEquals(lst.get(2), null);
 
-        //more than three strings in file
+        //more than two strings in file
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check third string
@@ -61,10 +61,10 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), null);
         Assert.assertEquals(lst.get(2), "value33");
 
-        //more than four strings in file
+        //more than three strings in file
         Assert.assertEquals(iterator.hasNext(), true);
 
-        //check forth string
+        //check fourth string
         lst = iterator.next();
 
         Assert.assertEquals(Objects.isNull(lst), false);
@@ -85,7 +85,7 @@ public class DsvArchiveDeserializerTest {
         );
 
         //first file with two stings
-        //more than one string in file
+        //is not empty
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check first string
@@ -97,10 +97,10 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), "value12");
         Assert.assertEquals(lst.get(2), "value13");
 
-        //more than two string in file
+        //more than one string in file
         Assert.assertEquals(iterator.hasNext(), true);
 
-        //check second file
+        //check second string
         lst = iterator.next();
 
         Assert.assertEquals(Objects.isNull(lst), false);
@@ -109,8 +109,8 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), null);
         Assert.assertEquals(lst.get(2), "value23");
 
-
         //check second file
+        //is not empty
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check first string
@@ -122,7 +122,7 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), "value12");
         Assert.assertEquals(lst.get(2), "value13");
 
-        //more than two strings in file
+        //more than one string in file
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check second string
@@ -134,7 +134,7 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), "value22");
         Assert.assertEquals(lst.get(2), null);
 
-        //more than three strings in file
+        //more than two strings in file
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check third string
@@ -146,7 +146,7 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), null);
         Assert.assertEquals(lst.get(2), "value33");
 
-        //more than four strings in file
+        //more than three strings in file
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check fourth string
@@ -158,7 +158,7 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), "value42");
         Assert.assertEquals(lst.get(2), null);
 
-        //more than three strings in file
+        //more than four strings in file
         Assert.assertEquals(iterator.hasNext(), false);
     }
 
@@ -189,9 +189,7 @@ public class DsvArchiveDeserializerTest {
                 new DsvPreference(ArchiveType.ZIP, null)
         );
 
-        //skip first file and get
-        //second file with two stings
-        //more than one string in file
+        //it not empty
         Assert.assertEquals(iterator.hasNext(), true);
 
         //check first string
@@ -203,10 +201,10 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(lst.get(1), "value12");
         Assert.assertEquals(lst.get(2), "value13");
 
-        //more than two string in file
+        //more than one string in file
         Assert.assertEquals(iterator.hasNext(), true);
 
-        //check second file
+        //check second string
         lst = iterator.next();
 
         Assert.assertEquals(Objects.isNull(lst), false);

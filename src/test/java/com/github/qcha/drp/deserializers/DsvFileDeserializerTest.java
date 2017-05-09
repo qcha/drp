@@ -3,7 +3,6 @@ package com.github.qcha.drp.deserializers;
 import com.github.qcha.drp.model.DsvPreference;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,13 +17,14 @@ public class DsvFileDeserializerTest {
     }
 
     @Test
-    public void parseTestFileWithTwoLines(){
+    public void parseTestFileWithTwoLines() {
         dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("file_with_2_lines.csv"), new DsvPreference());
 
+        //is not empty
         Assert.assertEquals(dsvFileDeserializer.hasNext(), true);
         List<String> lst = dsvFileDeserializer.next();
 
-        //first line
+        //check first line
         Assert.assertEquals(Objects.isNull(lst), false);
         Assert.assertEquals(lst.size(), 3);
         Assert.assertEquals(lst.get(0), "value11");
@@ -48,7 +48,7 @@ public class DsvFileDeserializerTest {
     }
 
     @Test
-    public void parseTestFileWithFourLines(){
+    public void parseTestFileWithFourLines() {
         dsvFileDeserializer = new DsvFileDeserializer(getClass().getResourceAsStream("file_with_4_lines.csv"), new DsvPreference());
 
         //check first line
