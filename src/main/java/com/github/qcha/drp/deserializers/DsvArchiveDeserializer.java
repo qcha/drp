@@ -33,8 +33,10 @@ public class DsvArchiveDeserializer implements DsvDeserializer {
 
         //get first entry in archive
         try {
-            ais = Objects.isNull(preference.getCompressType()) ? new ArchiveStreamFactory().createArchiveInputStream(preference.getArchiveType().name(), is) : new ArchiveStreamFactory().createArchiveInputStream(
-                    preference.getArchiveType().name(),
+            ais = Objects.isNull(preference.getCompressType()) ?
+                    new ArchiveStreamFactory().createArchiveInputStream(preference.getArchiveType().getAbbreviation(), is) :
+                    new ArchiveStreamFactory().createArchiveInputStream(
+                    preference.getArchiveType().getAbbreviation(),
                     new CompressorStreamFactory().createCompressorInputStream(
                             preference.getCompressType().getAbbreviation(),
                             is));
@@ -45,7 +47,7 @@ public class DsvArchiveDeserializer implements DsvDeserializer {
             throw new DsvDeserializerException("Error while reading", e);
         } catch (ArchiveException | CompressorException e) {
             logger.error("Can't create ArchiveInputStream, cause: {}", e);
-            throw new IllegalArgumentException("Can't create ArchiveInputStream.", e);
+            throw new RuntimeException("Can't create ArchiveInputStream.", e);
         }
 
         this.iterator = new DsvIterator(ais, preference);

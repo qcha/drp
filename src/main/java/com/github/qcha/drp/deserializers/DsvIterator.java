@@ -4,6 +4,7 @@ import com.github.qcha.drp.model.DsvPreference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.supercsv.io.CsvListReader;
 import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
@@ -19,7 +20,9 @@ import java.util.Objects;
 public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     private static final Logger logger = LogManager.getLogger();
 
+    @NotNull
     private final ICsvListReader reader;
+    @Nullable
     private List<String> current;
 
     DsvIterator(@NotNull final InputStream is, @NotNull final DsvPreference preference) {

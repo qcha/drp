@@ -13,12 +13,16 @@ import java.util.Objects;
 public class DsvCompressedFileDeserializer implements DsvDeserializer {
     private final DsvIterator iterator;
 
-    public DsvCompressedFileDeserializer(@NotNull final InputStream is, @NotNull final DsvPreference preference) throws CompressorException {
+    public DsvCompressedFileDeserializer(@NotNull final InputStream is, @NotNull final DsvPreference preference) {
         if (Objects.isNull(preference.getCompressType())) {
             throw new IllegalArgumentException("CompressType can't be null.");
         }
-
-        this.iterator = new DsvIterator(new CompressorStreamFactory().createCompressorInputStream(preference.getCompressType().getAbbreviation(), is), preference);
+        try {
+            this.iterator = new DsvIterator(new CompressorStreamFactory().createCompressorInputStream(
+                    preference.getCompressType().getAbbreviation(), is), preference);
+        } catch (CompressorException e) {
+            throw new RuntimeException("Can't create CompressorInputStream.", e);
+        }
     }
 
     @Override
