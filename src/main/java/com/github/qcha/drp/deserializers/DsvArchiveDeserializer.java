@@ -1,18 +1,14 @@
 package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.DsvPreference;
-import org.apache.commons.compress.archivers.ArchiveException;
-import org.apache.commons.compress.archivers.ArchiveInputStream;
-import org.apache.commons.compress.archivers.ArchiveStreamFactory;
-import org.apache.commons.compress.compressors.CompressorException;
-import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Iterator for archived files, but without compression.
@@ -20,55 +16,15 @@ import java.util.Objects;
 public class DsvArchiveDeserializer implements DsvDeserializer {
     private static final Logger logger = LogManager.getLogger();
 
-    private final DsvIterator iterator;
-    private final ArchiveInputStream ais;
+    private final DsvArchiveIterator iterator;
 
-    public DsvArchiveDeserializer(final InputStream is, final DsvPreference preference) {
-        if (Objects.isNull(preference.getArchiveType())) {
-            throw new IllegalArgumentException("Archive type is null in archive deserializer!");
-        }
-
-        //get first entry in archive
-        try {
-            ais = Objects.isNull(preference.getCompressType()) ?
-                    new ArchiveStreamFactory().createArchiveInputStream(preference.getArchiveType().getAbbreviation(), is) :
-                    new ArchiveStreamFactory().createArchiveInputStream(
-                    preference.getArchiveType().getAbbreviation(),
-                    new CompressorStreamFactory().createCompressorInputStream(
-                            preference.getCompressType().getAbbreviation(),
-                            is));
-
-            ais.getNextEntry();
-        } catch (IOException e) {
-            logger.error("Error while reading: {}", e);
-            throw new DsvDeserializerException("Error while reading", e);
-        } catch (ArchiveException | CompressorException e) {
-            logger.error("Can't create ArchiveInputStream, cause: {}", e);
-            throw new RuntimeException("Can't create ArchiveInputStream.", e);
-        }
-
-        this.iterator = new DsvIterator(ais, preference);
+    public DsvArchiveDeserializer(final InputStream is, @NotNull final DsvPreference preference) {
+        this.iterator = new DsvArchiveIterator(is, preference);
     }
 
     @Override
     public boolean hasNext() {
-        try {
-            if (iterator.hasNext()) {
-                return true;
-            } else {
-                //try to move entry in archive
-                if (Objects.nonNull(ais.getNextEntry())) {
-                    //skip current null in last entry
-                    iterator.next();
-                    return iterator.hasNext();
-                }
-
-                return false;
-            }
-        } catch (IOException e) {
-            logger.error("Error while reading: {}", e);
-            throw new DsvDeserializerException("Can't do next.", e);
-        }
+        return iterator.hasNext();
     }
 
     @Override
@@ -79,5 +35,11 @@ public class DsvArchiveDeserializer implements DsvDeserializer {
     @Override
     public void close() throws IOException {
         iterator.close();
+    }
+
+    @NotNull
+    @Override
+    public Iterator<List<String>> iterator() {
+        return iterator;
     }
 }

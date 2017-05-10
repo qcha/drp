@@ -5,9 +5,11 @@ import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +22,7 @@ public class DsvCompressedFileDeserializer implements DsvDeserializer {
 
     private final DsvIterator iterator;
 
-    public DsvCompressedFileDeserializer(final InputStream is, final DsvPreference preference) {
+    public DsvCompressedFileDeserializer(final InputStream is, @NotNull final DsvPreference preference) {
         if (Objects.isNull(preference.getCompressType())) {
             throw new IllegalArgumentException("CompressType can't be null.");
         }
@@ -48,5 +50,11 @@ public class DsvCompressedFileDeserializer implements DsvDeserializer {
         if (Objects.nonNull(iterator)) {
             iterator.close();
         }
+    }
+
+    @NotNull
+    @Override
+    public Iterator<List<String>> iterator() {
+        return iterator;
     }
 }
