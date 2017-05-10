@@ -2,7 +2,8 @@ package com.github.qcha.drp.deserializers;
 
 
 import com.github.qcha.drp.model.DsvPreference;
-import org.jetbrains.annotations.NotNull;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,14 +13,15 @@ import java.util.List;
  * Iterator for plain dsv file.
  */
 public class DsvFileDeserializer implements DsvDeserializer {
-    @NotNull
+    private static final Logger logger = LogManager.getLogger();
+
     private final DsvIterator iterator;
 
-    public DsvFileDeserializer(@NotNull final InputStream is, @NotNull final DsvPreference preference) {
+    public DsvFileDeserializer(final InputStream is, final DsvPreference preference) {
         this.iterator = new DsvIterator(is, preference);
     }
 
-    public DsvFileDeserializer(@NotNull final InputStream is, @NotNull final DsvPreference preference, final int bufferSize) {
+    public DsvFileDeserializer(final InputStream is, final DsvPreference preference, final int bufferSize) {
         this.iterator = new DsvIterator(is, preference, bufferSize);
     }
 

@@ -1,14 +1,14 @@
 package com.github.qcha.drp.deserializers;
 
-
-import org.jetbrains.annotations.NotNull;
-
+/**
+ * Basic Exception for Deserializer problems.
+ */
 public class DsvDeserializerException extends RuntimeException {
-    DsvDeserializerException(@NotNull String message) {
+    DsvDeserializerException(String message) {
         super(message);
     }
 
-    DsvDeserializerException(@NotNull String message, @NotNull Throwable cause) {
+    DsvDeserializerException(String message, Throwable cause) {
         super(message, cause);
     }
 }

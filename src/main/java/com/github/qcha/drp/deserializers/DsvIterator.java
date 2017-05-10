@@ -3,7 +3,6 @@ package com.github.qcha.drp.deserializers;
 import com.github.qcha.drp.model.DsvPreference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.supercsv.io.CsvListReader;
 import org.supercsv.io.ICsvListReader;
@@ -20,16 +19,15 @@ import java.util.Objects;
 public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     private static final Logger logger = LogManager.getLogger();
 
-    @NotNull
     private final ICsvListReader reader;
     @Nullable
     private List<String> current;
 
-    DsvIterator(@NotNull final InputStream is, @NotNull final DsvPreference preference) {
+    DsvIterator(final InputStream is, final DsvPreference preference) {
         this(is, preference, 8192);
     }
 
-    DsvIterator(@NotNull final InputStream is, @NotNull final DsvPreference preference, final int bufferSize) {
+    DsvIterator(final InputStream is, final DsvPreference preference, final int bufferSize) {
         final CsvPreference csvPreference = new CsvPreference.Builder(
                 preference.getQuotes(),
                 preference.getDelimiter(),

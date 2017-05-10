@@ -8,7 +8,6 @@ import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,12 +20,10 @@ import java.util.Objects;
 public class DsvArchiveDeserializer implements DsvDeserializer {
     private static final Logger logger = LogManager.getLogger();
 
-    @NotNull
     private final DsvIterator iterator;
-    @NotNull
     private final ArchiveInputStream ais;
 
-    public DsvArchiveDeserializer(@NotNull final InputStream is, @NotNull final DsvPreference preference) {
+    public DsvArchiveDeserializer(final InputStream is, final DsvPreference preference) {
         if (Objects.isNull(preference.getArchiveType())) {
             throw new IllegalArgumentException("Archive type is null in archive deserializer!");
         }
