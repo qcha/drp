@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Iterator for archived files, but without compression.
@@ -18,7 +19,12 @@ public class DsvArchiveDeserializer implements DsvDeserializer {
 
     private final DsvArchiveIterator iterator;
 
-    public DsvArchiveDeserializer(final InputStream is, @NotNull final DsvPreference preference) {
+    public DsvArchiveDeserializer(final InputStream is, final DsvPreference preference) {
+        //fixme repeatable bunch of code
+        if (Objects.isNull(preference)) {
+            throw new IllegalArgumentException("Preferences can't be null");
+        }
+
         this.iterator = new DsvArchiveIterator(is, preference);
     }
 

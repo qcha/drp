@@ -8,7 +8,6 @@ import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +20,12 @@ public class DsvArchiveIterator implements Iterator<List<String>>, AutoCloseable
     private final DsvIterator iterator;
     private final ArchiveInputStream ais;
 
-    DsvArchiveIterator(final InputStream is, @NotNull final DsvPreference preference) {
+    DsvArchiveIterator(final InputStream is, final DsvPreference preference) {
+        //fixme repeatable bunch of code
+        if (Objects.isNull(preference)) {
+            throw new IllegalArgumentException("Preferences can't be null");
+        }
+
         if (Objects.isNull(preference.getArchiveType())) {
             throw new IllegalArgumentException("Archive type is null in archive deserializer!");
         }

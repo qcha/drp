@@ -18,16 +18,22 @@ import java.util.Objects;
 
 public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     private static final Logger logger = LogManager.getLogger();
+    private static final int DEFAULT_BUFFER_SIZE = 8192;
 
     private final ICsvListReader reader;
     @Nullable
     private List<String> current;
 
     DsvIterator(final InputStream is, final DsvPreference preference) {
-        this(is, preference, 8192);
+        this(is, preference, DEFAULT_BUFFER_SIZE);
     }
 
     DsvIterator(final InputStream is, final DsvPreference preference, final int bufferSize) {
+        //fixme repeatable bunch of code
+        if (Objects.isNull(preference)) {
+            throw new IllegalArgumentException("Preferences can't be null");
+        }
+
         final CsvPreference csvPreference = new CsvPreference.Builder(
                 preference.getQuotes(),
                 preference.getDelimiter(),
@@ -35,7 +41,10 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
         ).build();
 
         try {
-            reader = new CsvListReader(new BufferedReader(new InputStreamReader(is, preference.getEncoding()), bufferSize), csvPreference);
+            reader = new CsvListReader(new BufferedReader(
+                    new InputStreamReader(is, preference.getEncoding()), bufferSize),
+                    csvPreference);
+
             current = reader.read();
         } catch (IOException e) {
             logger.error("Error while reading: {}", e);

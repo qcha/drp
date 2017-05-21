@@ -22,7 +22,12 @@ public class DsvCompressedFileDeserializer implements DsvDeserializer {
 
     private final DsvIterator iterator;
 
-    public DsvCompressedFileDeserializer(final InputStream is, @NotNull final DsvPreference preference) {
+    public DsvCompressedFileDeserializer(final InputStream is, final DsvPreference preference) {
+        //fixme repeatable bunch of code
+        if (Objects.isNull(preference)) {
+            throw new IllegalArgumentException("Preferences can't be null");
+        }
+
         if (Objects.isNull(preference.getCompressType())) {
             throw new IllegalArgumentException("CompressType can't be null.");
         }
