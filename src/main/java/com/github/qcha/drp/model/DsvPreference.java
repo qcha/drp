@@ -1,7 +1,6 @@
 package com.github.qcha.drp.model;
 
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.github.qcha.drp.model.DsvDefaultConstants.*;
@@ -10,16 +9,14 @@ import static com.github.qcha.drp.model.DsvDefaultConstants.*;
 public class DsvPreference {
     private final char delimiter;
     private final char quotes;
-    @NotNull
     private final String encoding;
-    @NotNull
     private final String lineSeparator;
     @Nullable
     private final ArchiveType archiveType;
     @Nullable
     private final CompressType compressType;
 
-    public DsvPreference(char delimiter, char quotes, @NotNull String encoding, @NotNull String lineSeparator, @Nullable ArchiveType archiveType, @Nullable CompressType compressType) {
+    public DsvPreference(char delimiter, char quotes, String encoding, String lineSeparator, @Nullable ArchiveType archiveType, @Nullable CompressType compressType) {
         this.delimiter = delimiter;
         this.quotes = quotes;
         this.encoding = encoding;
