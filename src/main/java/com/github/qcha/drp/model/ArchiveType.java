@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum ArchiveType {
 
+    //fixme - need to get it from lib
     /**
      * Constant used to identify the AR archive format.
      */

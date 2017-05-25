@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum CompressType {
 
+    //fixme - need to get it from lib
     /**
      * Constant used to identify the BZIP2 compression algorithm.
      */

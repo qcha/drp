@@ -1,6 +1,10 @@
 package com.github.qcha.drp.model;
 
-class DsvDefaultConstants {
+final class DsvDefaultConstants {
+    private DsvDefaultConstants() {
+        throw new IllegalAccessError("Class for constants!");
+    }
+
     static final char DEFAULT_DELIMITER = ';';
     static final char DEFAULT_QUOTES = '"';
     static final String DEFAULT_CHARSET = "UTF-8";
