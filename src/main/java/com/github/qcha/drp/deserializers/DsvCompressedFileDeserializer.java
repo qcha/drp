@@ -1,6 +1,7 @@
 package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.DsvPreference;
+import com.google.common.base.Verify;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.logging.log4j.LogManager;
@@ -23,14 +24,9 @@ public class DsvCompressedFileDeserializer implements DsvDeserializer {
     private final DsvIterator iterator;
 
     public DsvCompressedFileDeserializer(final InputStream is, final DsvPreference preference) {
-        //fixme repeatable bunch of code
-        if (Objects.isNull(preference)) {
-            throw new IllegalArgumentException("Preferences can't be null");
-        }
-
-        if (Objects.isNull(preference.getCompressType())) {
-            throw new IllegalArgumentException("CompressType can't be null.");
-        }
+        Verify.verifyNotNull(is, "InputStream can't be null");
+        Verify.verifyNotNull(preference, "Preference for Dsv resource can't be null");
+        Verify.verifyNotNull(preference.getCompressType(), "CompressType can't be null in DsvCompressedFileDeserializer");
 
         try {
             this.iterator = new DsvIterator(new CompressorStreamFactory().createCompressorInputStream(

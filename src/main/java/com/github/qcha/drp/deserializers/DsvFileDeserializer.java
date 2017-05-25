@@ -2,6 +2,7 @@ package com.github.qcha.drp.deserializers;
 
 
 import com.github.qcha.drp.model.DsvPreference;
+import com.google.common.base.Verify;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Iterator for plain dsv file.
@@ -26,10 +26,8 @@ public class DsvFileDeserializer implements DsvDeserializer {
     }
 
     public DsvFileDeserializer(final InputStream is, final DsvPreference preference, final int bufferSize) {
-        //fixme repeatable bunch of code
-        if (Objects.isNull(preference)) {
-            throw new IllegalArgumentException("Preferences can't be null");
-        }
+        Verify.verifyNotNull(is, "InputStream can't be null");
+        Verify.verifyNotNull(preference, "Preference for Dsv resource can't be null");
 
         this.iterator = new DsvIterator(is, preference, bufferSize);
     }

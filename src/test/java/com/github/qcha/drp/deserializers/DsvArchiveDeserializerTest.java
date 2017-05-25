@@ -2,6 +2,7 @@ package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.ArchiveType;
 import com.github.qcha.drp.model.DsvPreference;
+import com.google.common.base.VerifyException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -219,7 +220,7 @@ public class DsvArchiveDeserializerTest {
         Assert.assertEquals(iterator.hasNext(), false);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = VerifyException.class)
     public void createIteratorWithNullInputStream() throws Exception {
         iterator = new DsvArchiveDeserializer(
                 null,
@@ -227,7 +228,7 @@ public class DsvArchiveDeserializerTest {
         );
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = VerifyException.class)
     public void createIteratorWithNullDsvPrefetences() throws Exception {
         iterator = new DsvArchiveDeserializer(
                 getClass().getResourceAsStream("non_compress_archive_with_1_empty_file_and_1_non_empty_file.zip"),

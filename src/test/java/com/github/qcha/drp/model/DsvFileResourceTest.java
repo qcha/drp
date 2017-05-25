@@ -1,5 +1,6 @@
 package com.github.qcha.drp.model;
 
+import com.google.common.base.VerifyException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -62,17 +63,17 @@ public class DsvFileResourceTest {
         Assert.assertEquals(CompressType.BZIP2, resource.getPreference().getCompressType());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = VerifyException.class)
     public void createResourceWithNullUri() throws Exception {
         new DsvFileResource(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = VerifyException.class)
     public void createResourceWithNullUriNullArchiveAndCompress() throws Exception {
         new DsvFileResource(null, null, null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = VerifyException.class)
     public void createResourceWithNullUriAndNullPrefernce() throws Exception {
         new DsvFileResource(null, ' ', ' ', null, null, null, null);
     }

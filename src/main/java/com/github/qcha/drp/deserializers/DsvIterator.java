@@ -1,6 +1,7 @@
 package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.DsvPreference;
+import com.google.common.base.Verify;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
@@ -29,10 +30,8 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     }
 
     DsvIterator(final InputStream is, final DsvPreference preference, final int bufferSize) {
-        //fixme repeatable bunch of code
-        if (Objects.isNull(preference)) {
-            throw new IllegalArgumentException("Preferences can't be null");
-        }
+        Verify.verifyNotNull(is, "InputStream can't be null");
+        Verify.verifyNotNull(preference, "Preference for Dsv resource can't be null");
 
         final CsvPreference csvPreference = new CsvPreference.Builder(
                 preference.getQuotes(),

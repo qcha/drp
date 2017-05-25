@@ -1,11 +1,11 @@
 package com.github.qcha.drp.model;
 
+import com.google.common.base.Verify;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URI;
-import java.util.Objects;
 
 @Getter
 public class DsvFileResource {
@@ -15,10 +15,8 @@ public class DsvFileResource {
     private final DsvPreference preference;
 
     private DsvFileResource(URI uri, DsvPreference preference) {
-        //fixme repeatable bunch of code
-        if (Objects.isNull(preference) || Objects.isNull(uri)) {
-            throw new IllegalArgumentException("Preferences or URI can't be null");
-        }
+        Verify.verifyNotNull(preference, "Preference for Dsv resource can't be null.");
+        Verify.verifyNotNull(uri, "Uri can't be null");
 
         this.uri = uri;
         this.preference = preference;

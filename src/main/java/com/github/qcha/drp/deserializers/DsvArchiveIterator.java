@@ -1,6 +1,7 @@
 package com.github.qcha.drp.deserializers;
 
 import com.github.qcha.drp.model.DsvPreference;
+import com.google.common.base.Verify;
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
@@ -21,14 +22,9 @@ public class DsvArchiveIterator implements Iterator<List<String>>, AutoCloseable
     private final ArchiveInputStream ais;
 
     DsvArchiveIterator(final InputStream is, final DsvPreference preference) {
-        //fixme repeatable bunch of code
-        if (Objects.isNull(preference)) {
-            throw new IllegalArgumentException("Preferences can't be null");
-        }
-
-        if (Objects.isNull(preference.getArchiveType())) {
-            throw new IllegalArgumentException("Archive type is null in archive deserializer!");
-        }
+        Verify.verifyNotNull(is, "InputStream can't be null");
+        Verify.verifyNotNull(preference, "Preference for Dsv resource can't be null");
+        Verify.verifyNotNull(preference.getArchiveType(), "Archive type can't be null in DsvArchiveIterator");
 
         //get first entry in archive
         try {
