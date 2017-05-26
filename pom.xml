@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.qcha.drp</groupId>
+    <groupId>qcha.drp</groupId>
     <artifactId>drp</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -23,10 +23,18 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>nikita_molodec</id>
+            <name>Nikita Volkov</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <properties>
         <lombok.version>1.16.12</lombok.version>
+        <junit.version>4.12</junit.version>
         <guava.version>21.0</guava.version>
         <commons-compress.version>1.8</commons-compress.version>
         <supers-csv.version>2.4.0</supers-csv.version>
@@ -41,12 +49,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
-            <version>1.0-groovy-2.4</version>
+            <version>${junit.version}</version>
         </dependency>
         <!--Lombok-->
         <dependency>
