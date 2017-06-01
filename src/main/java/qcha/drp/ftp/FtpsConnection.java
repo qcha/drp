@@ -50,38 +50,25 @@ public class FtpsConnection implements FtpConnection {
         ftpsClient.execPBSZ(pbsz);
         ftpsClient.execPROT(prot);
 
-        connect();
-        login(username, password);
+        createConnection(username, password);
     }
 
-    private void connect() throws IOException {
+    private void createConnection(String username, String password) throws IOException {
         ftpsClient.connect(host, port);
         if (!FTPReply.isPositiveCompletion(ftpsClient.getReplyCode())) {
             logger.error("Can't connect to: {} on port: {}", host, port);
-            //fixme bad design.
-            ftpsClient.disconnect();
             throw new IOException(String.format("Can't connect to host: %s by port %s.", host, port));
         }
-    }
 
-    private void login(final String username, final String password) throws IOException {
         if (!ftpsClient.login(username, password)) {
             logger.error("Can't logging to {} with username:%s and password: {}", host, username, password);
-            //fixme bad design.
-            ftpsClient.logout();
-            ftpsClient.disconnect();
-            throw new IOException(String.format("Can't login with username: %s and password: %s", username, password));
+            throw new IOException(String.format("Can't login to %s with username: %s and password: %s", host, username, password));
         }
     }
 
     @Override
     public InputStream getResourceInputStream(final String filename) throws IOException {
         return ftpsClient.retrieveFileStream(filename);
-    }
-
-    @Override
-    public boolean changeDir(final String dirname) throws IOException {
-        return ftpsClient.changeWorkingDirectory(dirname);
     }
 
     @Override
