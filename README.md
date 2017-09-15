@@ -1,30 +1,34 @@
 ## DRP
-Dsv Resource Processing
+Dsv Resource Processing is a library for working with `DSV`-resources.
+
+It's a extract level in `ETL`.
 
 ### What is DSV?
 Shortly: Delimiter Separated Values
 
 More about: [`DSV`](https://en.wikipedia.org/wiki/Delimiter-separated_values)
 
-### What's about DRP?
-`DRP` - is a library which can work with `DSV`-resources. It's a extract level of `ETL`.
+### When i should use it?
+Sometimes Business store data in files and archives. For example - billing systems store therir billing data in archives with a lot of `CSV`-files - `DSV`-resources.
 
 Resources can be:
 * Common files - plain files
 * Archive files - with compression or not.
 
-And can storing as:
+And can be storing as:
 * Local
 * Remote:
     * FTP
     * SFTP
     * FTPS
 
-All what you need is resource [`URI`](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier).
+And if you are not working with local files - you need to write own code for parsing archives and getting it from remote places.
 
-### Why you should use it?
-When you have a problem with extract level of `ETL`, you always work with files, and in 90% of cases - you work with `DSV` files. And writing your own extractor and parser for resources, which can be stored on ftp or can be archived - is not good idea. 
-You can simply use `drp` library.
+To facilitate these actions, you can use `DRP`.
+
+### How i can try it?
+//todo
+
 ### What's inside?
 * Java 8 
 * CSV Parser: `super-csv`
