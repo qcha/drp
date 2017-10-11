@@ -1,6 +1,5 @@
 package qcha.drp.deserializers;
 
-import qcha.drp.model.DsvPreference;
 import com.google.common.base.Verify;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import org.supercsv.io.CsvListReader;
 import org.supercsv.io.ICsvListReader;
 import org.supercsv.prefs.CsvPreference;
+import qcha.drp.model.DsvPreference;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,7 +22,6 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     private static final int DEFAULT_BUFFER_SIZE = 8192;
 
     private final ICsvListReader reader;
-    @Nullable
     private List<String> current;
 
     DsvIterator(final InputStream is, final DsvPreference preference) {
@@ -30,8 +29,8 @@ public class DsvIterator implements Iterator<List<String>>, AutoCloseable {
     }
 
     DsvIterator(final InputStream is, final DsvPreference preference, final int bufferSize) {
-        Verify.verifyNotNull(is, "InputStream can't be null");
-        Verify.verifyNotNull(preference, "Preference for Dsv resource can't be null");
+        Verify.verify(Objects.nonNull(is), "InputStream can't be null");
+        Verify.verify(Objects.nonNull(preference), "Preference for Dsv resource can't be null");
 
         final CsvPreference csvPreference = new CsvPreference.Builder(
                 preference.getQuotes(),

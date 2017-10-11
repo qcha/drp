@@ -1,5 +1,7 @@
 package qcha.drp.model;
 
+import qcha.drp.ftp.FtpConnectionType;
+
 final class DsvDefaultConstants {
     private DsvDefaultConstants() {
         throw new IllegalAccessError("Class for constants!");
@@ -11,4 +13,5 @@ final class DsvDefaultConstants {
     static final String DEFAULT_LINE_SEPARATOR = System.lineSeparator();
     static final ArchiveType DEFAULT_ARCHIVE_TYPE = null;
     static final CompressType DEFAULT_COMPRESS_TYPE = null;
+    static final FtpConnectionType DEFAULT_CONNECTION_TYPE = null;
 }

@@ -9,12 +9,12 @@ import java.net.URI;
 import static qcha.drp.model.DsvDefaultConstants.*;
 
 
-public class DsvFileResourceTest {
+public class DsvResourceTest {
     private static final String TEST_URI = "file:///path/to/file.txt";
 
     @Test
     public void createResourceWithDefaultPreferences() throws Exception {
-        DsvFileResource resource = new DsvFileResource(URI.create(TEST_URI));
+        DsvResource resource = new DsvResource(URI.create(TEST_URI));
 
         Assert.assertEquals(TEST_URI, resource.getUri().toString());
         Assert.assertEquals(DEFAULT_DELIMITER, resource.getPreference().getDelimiter());
@@ -27,7 +27,7 @@ public class DsvFileResourceTest {
 
     @Test
     public void createResourceWithArchiveAndCompressPreferences() throws Exception {
-        DsvFileResource resource = new DsvFileResource(
+        DsvResource resource = new DsvResource(
                 URI.create(TEST_URI),
                 ArchiveType.AR,
                 CompressType.BZIP2
@@ -44,7 +44,7 @@ public class DsvFileResourceTest {
 
     @Test
     public void createResourceWithFullPreferences() throws Exception {
-        DsvFileResource resource = new DsvFileResource(
+        DsvResource resource = new DsvResource(
                 URI.create(TEST_URI),
                 ',',
                 '\'',
@@ -65,16 +65,16 @@ public class DsvFileResourceTest {
 
     @Test(expected = VerifyException.class)
     public void createResourceWithNullUri() throws Exception {
-        new DsvFileResource(null);
+        new DsvResource(null);
     }
 
     @Test(expected = VerifyException.class)
     public void createResourceWithNullUriNullArchiveAndCompress() throws Exception {
-        new DsvFileResource(null, null, null);
+        new DsvResource(null, null, null);
     }
 
     @Test(expected = VerifyException.class)
     public void createResourceWithNullUriAndNullPrefernce() throws Exception {
-        new DsvFileResource(null, ' ', ' ', null, null, null, null);
+        new DsvResource(null, ' ', ' ', null, null, null, null);
     }
 }

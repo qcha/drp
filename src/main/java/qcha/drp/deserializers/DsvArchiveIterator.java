@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class DsvArchiveIterator implements Iterator<List<String>>, AutoCloseable {
+class DsvArchiveIterator implements Iterator<List<String>>, AutoCloseable {
     private static final Logger logger = LogManager.getLogger();
     private final DsvIterator iterator;
     private final ArchiveInputStream ais;
