@@ -16,7 +16,6 @@ public class DsvPreference {
     private final ArchiveType archiveType;
     @Nullable
     private final CompressType compressType;
-    @Nullable
     private final FtpConnectionType connectionType;
 
     public DsvPreference(char delimiter,
@@ -25,7 +24,7 @@ public class DsvPreference {
                          String lineSeparator,
                          @Nullable ArchiveType archiveType,
                          @Nullable CompressType compressType,
-                         @Nullable FtpConnectionType connectionType
+                         FtpConnectionType connectionType
     ) {
         this.delimiter = delimiter;
         this.quotes = quotes;
